@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Database Management System - Chandigarh University</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. CORE VARIABLES (CU THEME) --- */
+        :root {
+            --cu-red: #B71C1C;
+            --cu-light-red: #FFEBEE;
+            --white: #ffffff;
+            --dark: #2c3e50;
+            --gray: #636e72;
+            --light-bg: #f8f9fa;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 20px 50px rgba(183, 28, 28, 0.2);
+            /* Smooth easing for all animations */
+            --transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        /* --- 2. PRELOADER STYLES --- */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(183, 28, 28, 0.1);
+            border-top: 5px solid var(--cu-red);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .preloader-text h2 {
+            font-size: 24px;
+            color: var(--dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+            animation: fadeInDown 1s ease;
+        }
+
+        .preloader-text h1 {
+            font-size: 32px;
+            color: var(--cu-red);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* --- 3. SCROLL ANIMATION CLASSES --- */
+        /* Base Reveal: Moves Up */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Left Reveal */
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-60px);
+            transition: 1s ease-out;
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Right Reveal */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(60px);
+            transition: 1s ease-out;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Staggered Delays for Hero Section */
+        .delay-100 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-200 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-300 {
+            transition-delay: 0.3s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* --- 4. HEADER --- */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+
+        nav {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--cu-red);
+            line-height: 1.2;
+        }
+
+        .logo-text span {
+            display: block;
+            font-size: 12px;
+            color: var(--dark);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--cu-red);
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            min-height: 100vh;
+            padding-top: 100px;
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--cu-red);
+            opacity: 0.03;
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .shape-1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            right: -150px;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            bottom: 50px;
+            left: -50px;
+            animation-delay: 2s;
+        }
+
+        .hero-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .hero-content span {
+            color: var(--cu-red);
+            position: relative;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .feature-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .tag {
+            background: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--cu-red);
+            border: 1px solid rgba(183, 28, 28, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        /* --- 6. SECTIONS GENERAL --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--cu-red);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- 7. ABOUT US & VISION --- */
+        .about-container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .vm-container {
+            margin-top: 60px;
+        }
+
+        .vision-intro {
+            background: var(--cu-light-red);
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--cu-red);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .vision-intro h3 {
+            color: var(--cu-red);
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .vm-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .vm-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--cu-red);
+            transition: var(--transition);
+        }
+
+        .vm-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .vm-card h3 {
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vm-card ul {
+            list-style: none;
+        }
+
+        .vm-card li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            gap: 10px;
+        }
+
+        .vm-card li i {
+            color: var(--cu-red);
+            margin-top: 5px;
+        }
+
+        /* --- 8. MODULES (SINGLE ROW, NO BUTTONS, FULL CARD CLICK) --- */
+        .modules-section {
+            background: var(--light-bg);
+        }
+
+        .modules-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .module-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hover Animation */
+        .module-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--cu-red);
+        }
+
+        /* Active Click Animation */
+        .module-card:active {
+            transform: scale(0.98);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--cu-red);
+            transform: scaleX(0);
+            transition: 0.4s;
+            transform-origin: left;
+        }
+
+        .module-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .mod-icon {
+            font-size: 65px;
+            color: var(--cu-red);
+            margin-bottom: 25px;
+            transition: 0.5s;
+            display: inline-block;
+        }
+
+        .module-card:hover .mod-icon {
+            transform: rotateY(180deg);
+        }
+
+        .module-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .module-card p {
+            font-size: 1rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* --- 9. GRID CARDS (Services/Features) --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            border: 1px solid #eee;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--cu-red);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .info-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* --- 10. TECH STACK --- */
+        /* Stylings for generic pills kept just in case needed elsewhere, but removed from HTML */
+        .tech-wrapper {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .tech-pill {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .tech-pill:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-pill i {
+            color: var(--cu-red);
+        }
+
+        /* --- 11. FAQ --- */
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-q {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .faq-q:hover {
+            background: #f9f9f9;
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 20px;
+            transition: max-height 0.4s ease;
+            color: var(--gray);
+            background: #fafafa;
+        }
+
+        .faq-item.active .faq-a {
+            max-height: 150px;
+            padding-bottom: 20px;
+            padding-top: 10px;
+        }
+
+        .faq-item.active .faq-q i {
+            transform: rotate(180deg);
+        }
+
+        /* --- 12. CONTACT --- */
+        .contact-box {
+            background: var(--cu-red);
+            color: white;
+            padding: 60px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: 0.3s;
+        }
+
+        .contact-box:hover {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .c-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .c-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* --- 13. FOOTER --- */
+        footer {
+            background: #1a1a1a;
+            color: #888;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+            border-top: 5px solid var(--cu-red);
+        }
+
+        /* --- 14. DASHBOARD SIMULATION --- */
+        #dashboard-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f4f6f8;
+            z-index: 2000;
+            overflow-y: auto;
+            animation: slideUp 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .dash-nav {
+            background: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .dash-main {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .dash-header {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            border-left: 5px solid var(--cu-red);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .stat-num {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--cu-red);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .dash-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .dash-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .dash-table th {
+            text-align: left;
+            padding: 12px;
+            background: #f8f9fa;
+            color: var(--cu-red);
+        }
+
+        .dash-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: white;
+            background: var(--cu-red);
+            transition: 0.3s;
+        }
+
+        .action-btn:hover {
+            background: #9a1212;
+            transform: scale(1.05);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .hero-container,
+            .about-container,
+            .vm-split {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .modules-row {
+                grid-template-columns: 1fr;
+            }
+
+            .preloader-text h2 {
+                font-size: 18px;
+            }
+
+            .preloader-text h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRELOADER (Loading Screen) -->
+    <div id="preloader">
+        <div class="spinner"></div>
+        <div class="preloader-text">
+            <h2 class="text-center">Labora</h2>
+            <h1>Lab Database System</h1>
+        </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <header>
+        <nav>
+            <a href="#" class="logo-area">
+                <i class="fas fa-university fa-2x" style="color: var(--cu-red);"></i>
+                <div class="logo-text">
+                    LABORA <span>Lab Database Management System</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#modules">Modules</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="/demo.html"><button class="action-btn" style="background:#991919;">DEPARTMENT LOGIN</button>
+                    </a></li>
+
+            </ul>
+        </nav>
+    </header>
+
+    <!-- MAIN WEBSITE CONTENT -->
+    <div id="main-website">
+
+        <!-- HERO SECTION (Staggered Animation) -->
+        <section id="home" class="hero">
+            <div class="hero-shape shape-1"></div>
+            <div class="hero-shape shape-2"></div>
+
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1 class="reveal-left delay-100">Lab Database <br><span>Management System</span></h1>
+                    <p class="reveal-left delay-200">A modern digital platform designed to efficiently manage and
+                        organize lab data at Universities. This system helps in maintaining records of placed
+                        fstudents, lab equipment, experiments, attendance, and reports in a structured and secure
+                        manner.</p>
+
+                    <div class="feature-tags reveal-left delay-300">
+                        <span class="tag"><i class="fas fa-server"></i> Centralized</span>
+                        <span class="tag"><i class="fas fa-lock"></i> Secure</span>
+                        <span class="tag"><i class="fas fa-bolt"></i> Real-time</span>
+                        <span class="tag"><i class="fas fa-users"></i> User-friendly</span>
+                    </div>
+
+                    <a href="#about" class="action-btn reveal-left"
+                        style="text-decoration:none; padding: 12px 30px; font-size:1rem; margin-top:10px;">Explore
+                        System</a>
+                </div>
+                <div class="hero-image reveal-right">
+                    <img src="/images/the-best-university.png" alt="CU Lab Home">
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT US -->
+        <section id="about" class="section-padding">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>About Us</h2>
+                </div>
+                <div class="about-container reveal-left">
+                    <div class="about-text">
+                        <h3>Simplifying lab Management</h3>
+                        <p style="margin: 15px 0; color: var(--gray);">
+                            The Lab Database System is developed to simplify lab management processes at Chandigarh
+                            University. Traditionally, lab data was maintained manually, which often led to errors and
+                            inefficiencies.
+                        </p>
+                        <p style="color: var(--gray);">
+                            This platform provides a digital solution where all lab-related information is stored and
+                            managed in one place. It improves productivity, reduces paperwork, and ensures data
+                            accuracy. Our system is built using modern web technologies and follows best practices for
+                            security and performance.
+                        </p>
+                    </div>
+                    <div class="about-image">
+                        <img src="/images/ios-image.webp" alt="About CU System">
+                    </div>
+                </div>
+
+                <!-- VISION & MISSION -->
+                <div class="vm-container reveal">
+                    <div class="vision-intro">
+
+                        <p style="max-width: 800px;  margin: 0 auto; color: var(--dark);">
+                            The Lab Database Management System is a digital platform developed for Universities ,
+                            Colleges
+                            to manage lab data efficiently. It replaces traditional paperwork with a secure and
+                            organized system.
+
+                            The platform stores all lab-related information in one place, making it easy to access and
+                            manage. It provides role-based access to lab in-charge, faculty, and HODs, ensuring proper
+                            control and data security.
+
+                            Each department has a separate portal, which helps in better organization and avoids
+                            confusion. The system also allows easy document upload and quick access to records.
+
+                            Overall, the system improves efficiency, reduces manual work, and supports the digital
+                            transformation of laboratory management.
+                        </p>
+                    </div>
+                    <div class="vm-split">
+                        <div class="vm-card">
+                            <h3><i class="fas fa-eye" style="color:var(--cu-red)"></i> Our Vision</h3>
+                            <p> Our vision is to create a fully digital and automated lab environment where all academic
+                                and practical activities are managed efficiently through technology.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle"></i> Enhance the quality of lab management</li>
+                                <li><i class="fas fa-check-circle"></i> Promote digital learning</li>
+                                <li><i class="fas fa-check-circle"></i> Ensure transparency and accuracy</li>
+                                <li><i class="fas fa-check-circle"></i> Support innovation in education systems</li>
+                            </ul>
+                        </div>
+                        <div class="vm-card" style="border-top-color: #2c3e50;">
+                            <h3><i class="fas fa-rocket" style="color:#2c3e50"></i> Our Mission</h3>
+                            <p>Our mission is to provide a reliable and user-friendly platform that simplifies lab data
+                                management for students and faculty.</p>
+                            <ul>
+                                <li><i class="fas fa-check-circle" style="color:#2c3e50"></i> Delivering accurate and
+                                    real-time data</li>
+                                <li><i class="fas fa-check-circle" style="color:#2c3e50"></i> Reducing manual workload
+                                </li>
+                                <li><i class="fas fa-check-circle" style="color:#2c3e50"></i> Improving student and
+                                    faculty experience</li>
+                                <li><i class="fas fa-check-circle" style="color:#2c3e50"></i> Ensuring data security and
+                                    privacy</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES -->
+        <section class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>Our Services</h2>
+                </div>
+                <div class="grid-3 reveal">
+                    <div class="info-card">
+                        <h4><i class="fas fa-users"></i> Student Record Management</h4>
+                        <p>Complete digital record keeping.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-calendar-check"></i> Lab Attendance</h4>
+                        <p>Automated tracking of presence.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-tools"></i> Equipment Management</h4>
+                        <p>Tracking usage and maintenance.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-flask"></i> Experiment Records</h4>
+                        <p>Digital storage of lab data.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-file-upload"></i> Report Submission</h4>
+                        <p>Digital upload and grading.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-user-lock"></i> Access Control</h4>
+                        <p>Role-based authentication.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULES (BUTTONS REMOVED, FULL CARD CLICKABLE) -->
+        <section id="modules" class="section-padding modules-section">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>System Modules</h2>
+                    <p>Click on a card to access the dashboard</p>
+                </div>
+
+                <div class="modules-row reveal">
+
+                    <!-- Instructor Module (Clickable Card) -->
+                    <div class="module-card" onclick="openModule('instructor')">
+                        <i class="fas fa-chalkboard-teacher mod-icon"></i>
+                        <h3>Instructor Module</h3>
+                        <p>Mark attendance, upload experiments, evaluate reports, manage sessions.</p>
+                        <!-- Button Removed as requested -->
+                    </div>
+
+                    <!-- Admin Module (Clickable Card) -->
+                    <div class="module-card" onclick="openModule('admin')">
+                        <i class="fas fa-user-shield mod-icon"></i>
+                        <h3>Admin Module</h3>
+                        <p>Manage users, monitor system, generate analytics, ensure security.</p>
+                        <!-- Button Removed as requested -->
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section id="features" class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>System Capabilities</h2>
+                </div>
+                <div class="grid-3 reveal">
+                    <div class="info-card">
+                        <h4><i class="fas fa-tools"></i> Equipment Management</h4>
+                        <p>Add, track usage, monitor availability, and maintain records.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-calendar-check"></i> Attendance</h4>
+                        <p>Daily marking, report generation, student-wise tracking.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-chart-line"></i> Reports & Analytics</h4>
+                        <p>Performance reports, attendance analysis, data visualization.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-shield-alt"></i> Security & Privacy</h4>
+                        <p>Secure login, role-based access, encryption, backups.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-database"></i> System Overview</h4>
+                        <p>Digital storage, centralized system, fast and organized.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-user-lock"></i> Role-Based Access</h4>
+                        <p>Lab In-charge, HOD, and Students have controlled access.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH & INFRASTRUCTURE (UPDATED: CENTERED & NO LANGUAGES) -->
+        <section class="section-padding">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>Technology & Infrastructure</h2>
+                </div>
+
+                <!-- Centered Layout Wrapper -->
+                <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px;">
+
+                    <!-- Tech Stack (Languages Removed) -->
+                    <div class="info-card reveal">
+                        <h4><i class="fas fa-code"></i> Technology Stack</h4>
+                        <p style="margin-bottom:0;">The system is built using modern technologies to ensure performance
+                            and scalability.</p>
+                        <!-- Coding language pills removed as requested -->
+                    </div>
+
+                    <!-- Department Portals (Centered) -->
+                    <div class="info-card reveal">
+                        <h4><i class="fas fa-building"></i> Department Portals & Storage</h4>
+                        <p>Each department has a separate portal for organized management. All data is stored digitally
+                            with strong backup systems, ensuring no data loss or unauthorized access.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- USER EXPERIENCE -->
+        <section class="section-padding" style="background: var(--light-bg);">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>User Experience</h2>
+                </div>
+                <div class="grid-3 reveal">
+                    <div class="info-card">
+                        <h4><i class="fas fa-comments"></i> Messaging System</h4>
+                        <p>Employees, HOD, and staff can communicate directly.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-bell"></i> Smart Notifications</h4>
+                        <p>Real-time alerts for messages, uploads, and updates.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4><i class="fas fa-laptop"></i> User-Friendly Interface</h4>
+                        <p>Easy navigation, clear dashboard, and fast performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCLUSION -->
+        <section class="section-padding" style="background: var(--cu-light-red); text-align: center;">
+            <div class="container reveal">
+                <h2>System Conclusion</h2>
+                <p style="max-width: 800px; margin: 20px auto; color: var(--dark);">
+                    The Lab Database Management System is a complete and professional solution for managing lab data
+                    digitally. It reduces manual work, improves efficiency, ensures data security, and enhances
+                    communication between users.
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="section-padding">
+            <div class="container">
+                <div class="section-title reveal">
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                <div style="max-width: 800px; margin: 0 auto;" class="reveal">
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q1: How do I access the system? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-a">Access is provided via the Instructor or Admin modules on the dashboard page.
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q2: Is the system secure? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-a">Yes, it uses advanced security measures, encryption, and role-based access
+                            control.</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-q" onclick="toggleFaq(this)">Q3: Can reports be downloaded? <i
+                                class="fas fa-chevron-down"></i></div>
+                        <div class="faq-a">Yes, reports can be downloaded in PDF format.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section-padding">
+            <div class="container">
+                <div class="contact-box reveal">
+                    <h2>Contact Us</h2>
+                    <p>For any queries or support, feel free to contact us</p>
+                    <div class="c-grid">
+                        <div class="c-item"><i class="fas fa-envelope"></i> support@labmanagement.com</div>
+                        <div class="c-item"><i class="fas fa-phone"></i> +91-XXXXXXXXXX</div>
+                        <div class="c-item"><i class="fas fa-map-marker-alt"></i> Labora, Punjab</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="logo-text" style="color: white; margin-bottom: 10px;">
+                LABORA
+                <span style="color: #aaa;">Lab Database Management System</span>
+            </div>
+            <p>&copy; 2026 Labora. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+    <!-- DASHBOARD OVERLAY (ANIMATED & INTERACTIVE) -->
+    <div id="dashboard-overlay">
+        <div class="dash-nav">
+            <div class="logo-area">
+                <i class="fas fa-university fa-lg" style="color: var(--cu-red);"></i>
+                <div class="logo-text" style="font-size: 1.2rem;">
+                    CU-LAB DB <span id="user-role-label" style="font-size: 0.9rem; color: var(--cu-red);">| Instructor
+                        View</span>
+                </div>
+            </div>
+            <button class="action-btn" style="background:#636e72;" onclick="closeDashboard()">Close Dashboard</button>
+        </div>
+
+        <div class="dash-main" id="dash-content">
+            <!-- Dynamic Content with JS Animations -->
+        </div>
+    </div>
+
+    <script>
+        // --- 1. PRELOADER LOGIC ---
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            // Fade out effect
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                // Remove from DOM after fade out
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500); // Show for 1.5 seconds
+        });
+
+        // --- 2. SCROLL ANIMATIONS (Intersection Observer) ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+        // --- 3. FAQ TOGGLE ---
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // --- 4. NUMBER COUNTING ANIMATION FUNCTION ---
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // Formatting based on value type
+                if (end > 100) {
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                } else {
+                    // Keep decimal for percentages if needed, though here we use integers
+                    obj.innerHTML = Math.floor(progress * (end - start) + start);
+                }
+
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                } else {
+                    // Ensure final value is correct
+                    obj.innerHTML = end;
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // --- 5. PROGRESS BAR ANIMATION FUNCTION ---
+        function animateBars() {
+            const bars = document.querySelectorAll('.progress-bar-fill');
+            bars.forEach(bar => {
+                const targetWidth = bar.getAttribute('data-width');
+                // Small delay to ensure transition works
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 100);
+            });
+        }
+
+        // --- 6. DASHBOARD LOGIC (PROPER ANIMATED) ---
+        const dashOverlay = document.getElementById('dashboard-overlay');
+        const mainSite = document.getElementById('main-website');
+        const dashContent = document.getElementById('dash-content');
+        const roleLabel = document.getElementById('user-role-label');
+
+        function openModule(role) {
+            // Hide main site, show dashboard
+            mainSite.style.display = 'none';
+            dashOverlay.style.display = 'block';
+            window.scrollTo(0, 0);
+
+            const roleName = role.charAt(0).toUpperCase() + role.slice(1);
+            roleLabel.innerText = `| ${roleName} View`;
+
+            let html = '';
+
+            if (role === 'instructor') {
+                html = `
+                    <div class="dash-header">
+                        <h2>Instructor Dashboard</h2>
+                        <p>Manage student data, mark attendance, and evaluate reports.</p>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-box"><span class="stat-num" data-target="42">0</span>Students</div>
+                        <div class="stat-box"><span class="stat-num" data-target="95">0</span>% Present</div>
+                        <div class="stat-box"><span class="stat-num" data-target="5">0</span>Pending Eval</div>
+                    </div>
+                    <div class="dash-card">
+                        <h3><i class="fas fa-clipboard-check"></i> Mark Attendance</h3>
+                        <div style="background:#f9f9f9; padding:15px; border-radius:8px; margin-bottom:10px;">
+                            <label>Date: <input type="date" style="padding:5px; border-radius:4px; border:1px solid #ddd;"></label>
+                            <button class="action-btn" style="margin-left:10px;">Start Marking</button>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <h3><i class="fas fa-users"></i> Recent Submissions</h3>
+                        <table class="dash-table">
+                            <tr><th>Student</th><th>Experiment</th><th>Action</th></tr>
+                            <tr><td>Rohan Kumar</td><td>Ohm's Law</td><td><button class="action-btn">Grade</button></td></tr>
+                            <tr><td>Priya Singh</td><td>Logic Gates</td><td><button class="action-btn">Grade</button></td></tr>
+                        </table>
+                    </div>
+                `;
+            } else if (role === 'admin') {
+                html = `
+                    <div class="dash-header">
+                        <h2>Admin Control Panel</h2>
+                        <p>Full system control, user management, and analytics.</p>
+                    </div>
+                    <div class="stats-row">
+                        <div class="stat-box"><span class="stat-num" data-target="1240">0</span>Total Users</div>
+                        <div class="stat-box"><span class="stat-num" data-target="100">0</span>% Active</div>
+                        <div class="stat-box"><span class="stat-num" data-target="24">0</span>/7 Support</div>
+                    </div>
+                    <div class="dash-card">
+                        <h3><i class="fas fa-users-cog"></i> User Management</h3>
+                        <button class="action-btn" style="margin-right:10px;">+ Add Student</button>
+                        <button class="action-btn" style="background:#636e72;">+ Add Instructor</button>
+                    </div>
+                    <div class="dash-card">
+                        <h3><i class="fas fa-chart-bar"></i> System Analytics</h3>
+                        <div style="margin-top:20px;">
+                            <p>Database Storage: 70% Used</p>
+                            <div style="background:#eee; height:15px; border-radius:10px; margin-top:5px; overflow:hidden;">
+                                <div class="progress-bar-fill" style="width: 0;" data-width="70%"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px;">
+                            <p>Server Load: 45%</p>
+                            <div style="background:#eee; height:15px; border-radius:10px; margin-top:5px; overflow:hidden;">
+                                <div class="progress-bar-fill" style="width: 0; background:green;" data-width="45%"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            dashContent.innerHTML = html;
+
+            // Trigger Animations after HTML injection
+            setTimeout(() => {
+                // Count up animation for numbers
+                const counters = document.querySelectorAll('.stat-num');
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    animateValue(counter, 0, target, 1500);
+                });
+                // Animate Progress Bars
+                animateBars();
+            }, 100);
+        }
+
+        function closeDashboard() {
+            dashOverlay.style.display = 'none';
+            mainSite.style.display = 'block';
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+
+</html>

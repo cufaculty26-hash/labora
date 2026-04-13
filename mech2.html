@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Mechanical Engineering | Chandigarh University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Poppins',sans-serif;background:#0c0c0c;color:#ffffff;overflow-x:hidden}
+
+        ::-webkit-scrollbar{width:5px}
+        ::-webkit-scrollbar-track{background:#0c0c0c}
+        ::-webkit-scrollbar-thumb{background:#dc2626;border-radius:10px}
+
+        .red{color:#dc2626}
+        .white{color:#fff}
+        .gray{color:#999}
+        .light-gray{color:#ccc}
+
+        /* NAVBAR */
+        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:16px 0;transition:all .3s}
+        .navbar.scrolled{background:rgba(12,12,12,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(220,38,38,.15);padding:10px 0}
+        .nav-inner{max-width:1200px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+        .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+        .nav-logo-icon{width:42px;height:42px;background:linear-gradient(135deg,#dc2626,#991b1b);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;color:#fff}
+        .nav-logo-text{font-weight:700;font-size:15px;color:#fff;line-height:1.2}
+        .nav-logo-sub{font-size:10px;color:#999;letter-spacing:1px;text-transform:uppercase}
+        .nav-links{display:flex;align-items:center;gap:4px}
+        .nav-links a{padding:8px 14px;font-size:13px;color:#999;text-decoration:none;border-radius:8px;transition:all .3s;font-weight:500}
+        .nav-links a:hover{color:#fff;background:rgba(220,38,38,.1)}
+        .nav-cta{padding:10px 24px!important;background:linear-gradient(135deg,#dc2626,#991b1b)!important;color:#fff!important;border-radius:10px!important;font-weight:600!important;transition:all .3s!important}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(220,38,38,.3)}
+        .hamburger{display:none;background:none;border:none;color:#fff;font-size:22px;cursor:pointer}
+
+        /* HERO */
+        .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 24px 80px}
+        .hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 15% 50%,rgba(220,38,38,.08) 0%,transparent 60%),radial-gradient(ellipse at 85% 20%,rgba(220,38,38,.05) 0%,transparent 50%)}
+        .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(220,38,38,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(220,38,38,.03) 1px,transparent 1px);background-size:50px 50px}
+        .hero-inner{max-width:1200px;margin:auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:rgba(220,38,38,.08);border:1px solid rgba(220,38,38,.2);border-radius:50px;margin-bottom:24px}
+        .hero-badge-dot{width:8px;height:8px;background:#dc2626;border-radius:50%;animation:pulse 2s infinite}
+        .hero-badge span{font-size:12px;color:#dc2626;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+        .hero h1{font-size:clamp(36px,5vw,64px);font-weight:900;line-height:1.1;margin-bottom:16px}
+        .hero h1 .highlight{background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .hero-desc{font-size:17px;color:#888;line-height:1.7;margin-bottom:32px;max-width:480px}
+        .hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:48px}
+        .btn-primary{padding:14px 36px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:8px;font-family:'Poppins',sans-serif}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(220,38,38,.35)}
+        .btn-secondary{padding:14px 36px;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:12px;font-size:15px;font-weight:500;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'Poppins',sans-serif}
+        .btn-secondary:hover{border-color:#dc2626;background:rgba(220,38,38,.05)}
+        .hero-stats{display:flex;gap:32px}
+        .hero-stat-num{font-size:32px;font-weight:800;color:#fff}
+        .hero-stat-num span{color:#dc2626}
+        .hero-stat-label{font-size:12px;color:#777;margin-top:2px}
+        .hero-stat-divider{width:1px;background:rgba(255,255,255,.1)}
+        .hero-visual{position:relative;display:flex;justify-content:center}
+        .hero-image-wrapper{width:100%;max-width:480px;aspect-ratio:1;border-radius:24px;border:1px solid rgba(220,38,38,.15);overflow:hidden;position:relative;background:#111}
+        .hero-image-wrapper img{width:100%;height:100%;object-fit:cover;opacity:.3;mix-blend-mode:luminosity}
+        .hero-image-overlay{position:absolute;inset:0;background:linear-gradient(to top,#0c0c0c,transparent 60%)}
+        .hero-image-info{position:absolute;bottom:24px;left:24px;right:24px}
+        .hero-image-info .label{font-size:11px;color:#dc2626;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px}
+        .hero-image-info .title{font-size:20px;font-weight:700}
+        .hero-image-info .sub{font-size:13px;color:#888}
+        .float-badge{position:absolute;padding:12px 18px;background:rgba(17,17,17,.9);border:1px solid rgba(220,38,38,.2);border-radius:14px;backdrop-filter:blur(10px);animation:floatBadge 3s ease-in-out infinite}
+        .float-badge-1{top:20px;right:-10px;animation-delay:0s}
+        .float-badge-2{bottom:40px;left:-20px;animation-delay:.8s}
+        .float-badge-3{top:50%;right:-30px;animation-delay:1.5s}
+        .float-badge .fb-icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:4px}
+        .float-badge .fb-label{font-size:10px;color:#777}
+        .float-badge .fb-value{font-size:13px;font-weight:700}
+
+        @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{opacity:.7;box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+        @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+        /* SECTIONS */
+        .section{padding:100px 24px;position:relative}
+        .section-inner{max-width:1200px;margin:auto}
+        .section-header{text-align:center;margin-bottom:64px}
+        .section-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:rgba(220,38,38,.06);border:1px solid rgba(220,38,38,.15);border-radius:50px;margin-bottom:16px;font-size:11px;color:#dc2626;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+        .section-title{font-size:clamp(28px,4vw,48px);font-weight:800;line-height:1.2;margin-bottom:12px}
+        .section-title .highlight{background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .section-desc{font-size:16px;color:#777;max-width:600px;margin:auto;line-height:1.7}
+        .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(220,38,38,.2),transparent);max-width:900px;margin:0 auto}
+
+        /* CARDS */
+        .card{background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;transition:all .4s ease;position:relative;overflow:hidden}
+        .card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,#dc2626,transparent);opacity:0;transition:opacity .4s}
+        .card:hover{transform:translateY(-6px);border-color:rgba(220,38,38,.2);box-shadow:0 20px 60px rgba(0,0,0,.4)}
+        .card:hover::before{opacity:1}
+        .card-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+        .card-icon.red{background:rgba(220,38,38,.1);color:#dc2626}
+        .card-icon.green{background:rgba(34,197,94,.1);color:#22c55e}
+        .card-icon.blue{background:rgba(59,130,246,.1);color:#3b82f6}
+        .card-icon.yellow{background:rgba(234,179,8,.1);color:#eab308}
+        .card-icon.purple{background:rgba(168,85,247,.1);color:#a855f7}
+        .card-icon.pink{background:rgba(236,72,153,.1);color:#ec4899}
+        .card-num{font-size:36px;font-weight:800;color:#fff;margin-bottom:4px}
+        .card-num span{color:#dc2626}
+        .card-label{font-size:13px;color:#888;margin-bottom:12px}
+        .card-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .card-tag{padding:4px 10px;font-size:11px;border-radius:6px;font-weight:500}
+        .card-tag.red{background:rgba(220,38,38,.1);color:#ef4444}
+        .card-tag.green{background:rgba(34,197,94,.1);color:#22c55e}
+        .card-tag.blue{background:rgba(59,130,246,.1);color:#3b82f6}
+        .card-tag.yellow{background:rgba(234,179,8,.1);color:#eab308}
+
+        /* GRID */
+        .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+
+        /* TIMELINE */
+        .timeline{position:relative;padding-left:40px}
+        .timeline-line{position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,#dc2626,#dc2626,transparent)}
+        .timeline-item{position:relative;margin-bottom:20px}
+        .timeline-dot{position:absolute;left:-33px;top:8px;width:10px;height:10px;background:#dc2626;border-radius:50%;border:2px solid #0c0c0c;box-shadow:0 0 12px rgba(220,38,38,.5)}
+        .timeline-card{background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:18px 20px;transition:all .3s}
+        .timeline-card:hover{border-color:rgba(220,38,38,.3)}
+        .timeline-year{font-size:13px;font-weight:700;color:#dc2626;margin-bottom:4px}
+        .timeline-text{font-size:13px;color:#bbb;line-height:1.5}
+
+        /* TABS */
+        .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+        .tab-btn{padding:10px 22px;font-size:13px;font-weight:600;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:transparent;color:#888;cursor:pointer;transition:all .3s;font-family:'Poppins',sans-serif}
+        .tab-btn.active{background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border-color:transparent}
+        .tab-btn:hover:not(.active){color:#fff;border-color:rgba(220,38,38,.3)}
+        .tab-panel{display:none;animation:fadeInUp .5s ease}
+        .tab-panel.active{display:block}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+        /* BADGE BOX */
+        .badge-box{background:linear-gradient(135deg,rgba(220,38,38,.08),rgba(220,38,38,.02));border:1px solid rgba(220,38,38,.2);border-radius:16px;padding:32px;text-align:center}
+        .badge-box .big{font-size:48px;font-weight:900;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .badge-box .small{font-size:13px;color:#888;margin-top:4px}
+
+        /* AVATAR */
+        .avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0}
+        .avatar-lg{width:80px;height:80px;font-size:26px}
+
+        /* LIST */
+        .check-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+        .check-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#aaa;line-height:1.5}
+        .check-list li i{color:#22c55e;margin-top:3px;font-size:11px;flex-shrink:0}
+
+        /* TAG PILLS */
+        .pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+        .pill{padding:10px 18px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;font-size:13px;color:#ccc;transition:all .3s;display:flex;align-items:center;gap:8px}
+        .pill:hover{border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.05)}
+        .pill i{font-size:14px}
+
+        /* MARQUEE */
+        .marquee-wrap{overflow:hidden;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);padding:18px 0}
+        .marquee-track{display:flex;animation:marquee 25s linear infinite;width:max-content}
+        .marquee-track span{padding:0 28px;font-size:13px;font-weight:600;color:rgba(255,255,255,.15);white-space:nowrap}
+        .marquee-track .dot{color:rgba(220,38,38,.2);padding:0 8px}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* IMAGE CARD */
+        .img-card{border-radius:16px;overflow:hidden;background:#141414;border:1px solid rgba(255,255,255,.06);transition:all .4s}
+        .img-card:hover{transform:translateY(-4px);box-shadow:0 16px 50px rgba(0,0,0,.3)}
+        .img-card img{width:100%;height:200px;object-fit:cover;display:block}
+        .img-card-body{padding:24px}
+        .img-card-label{font-size:11px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+        .img-card-title{font-size:17px;font-weight:700;margin-bottom:4px}
+        .img-card-date{font-size:12px;color:#777;margin-bottom:8px}
+        .img-card-desc{font-size:13px;color:#999;line-height:1.6}
+
+        /* RECRUITER GRID */
+        .recruiter-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+        .recruiter-item{background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px 12px;text-align:center;transition:all .3s}
+        .recruiter-item:hover{border-color:rgba(220,38,38,.2);transform:translateY(-3px)}
+        .recruiter-item .name{font-size:13px;font-weight:700}
+        .recruiter-item .type{font-size:10px;color:#777;margin-top:2px}
+
+        /* FEATURE ROW */
+        .feature-row{display:flex;align-items:flex-start;gap:16px;padding:18px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:14px;transition:all .3s}
+        .feature-row:hover{border-color:rgba(220,38,38,.15)}
+        .feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+        .feature-title{font-size:14px;font-weight:600;margin-bottom:2px}
+        .feature-desc{font-size:12px;color:#888;line-height:1.5}
+
+        /* CTA SECTION */
+        .cta-section{position:relative;overflow:hidden}
+        .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(220,38,38,.06) 0%,transparent 70%)}
+
+        /* FOOTER */
+        .footer{border-top:1px solid rgba(255,255,255,.06);padding:32px 24px}
+        .footer-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+        .footer-left{display:flex;align-items:center;gap:12px}
+        .footer-text{font-size:12px;color:#555}
+
+        /* ANIMATIONS */
+        .anim{opacity:0;transform:translateY(40px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+        .anim.visible{opacity:1;transform:translateY(0)}
+        .anim-left{opacity:0;transform:translateX(-40px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+        .anim-left.visible{opacity:1;transform:translateX(0)}
+        .anim-right{opacity:0;transform:translateX(40px);transition:all .7s cubic-bezier(.4,0,.2,1)}
+        .anim-right.visible{opacity:1;transform:translateX(0)}
+        .anim-scale{opacity:0;transform:scale(.9);transition:all .7s cubic-bezier(.4,0,.2,1)}
+        .anim-scale.visible{opacity:1;transform:scale(1)}
+
+        .delay-1{transition-delay:.1s}
+        .delay-2{transition-delay:.2s}
+        .delay-3{transition-delay:.3s}
+        .delay-4{transition-delay:.4s}
+        .delay-5{transition-delay:.5s}
+        .delay-6{transition-delay:.6s}
+
+        /* MOBILE MENU */
+        .mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;opacity:0;pointer-events:none;transition:opacity .3s}
+        .mobile-overlay.open{opacity:1;pointer-events:all}
+        .mobile-drawer{position:fixed;top:0;right:0;width:280px;height:100%;background:#111;border-left:1px solid rgba(255,255,255,.08);z-index:1000;transform:translateX(100%);transition:transform .3s;padding:24px}
+        .mobile-drawer.open{transform:translateX(0)}
+        .mobile-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#fff;font-size:20px;cursor:pointer}
+        .mobile-links{margin-top:60px;display:flex;flex-direction:column;gap:4px}
+        .mobile-links a{padding:12px 16px;font-size:14px;color:#999;text-decoration:none;border-radius:10px;transition:all .3s;font-weight:500}
+        .mobile-links a:hover{color:#fff;background:rgba(220,38,38,.08)}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .grid-4{grid-template-columns:repeat(2,1fr)}
+            .grid-3{grid-template-columns:repeat(2,1fr)}
+            .hero-inner{grid-template-columns:1fr;text-align:center}
+            .hero-desc{margin:0 auto 32px}
+            .hero-btns{justify-content:center}
+            .hero-stats{justify-content:center}
+            .hero-visual{display:none}
+            .nav-links{display:none}
+            .hamburger{display:block}
+            .recruiter-grid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media(max-width:640px){
+            .grid-4,.grid-3,.grid-2{grid-template-columns:1fr}
+            .hero-stats{flex-direction:column;gap:16px;align-items:center}
+            .hero-stat-divider{width:60px;height:1px}
+            .recruiter-grid{grid-template-columns:repeat(2,1fr)}
+            .section{padding:60px 16px}
+            .section-header{margin-bottom:40px}
+        }
+
+        @media(prefers-reduced-motion:reduce){
+            *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">CU</div>
+            <div>
+                <div class="nav-logo-text">Mechanical Engineering</div>
+                <div class="nav-logo-sub">Chandigarh University</div>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#highlights">Highlights</a>
+            <a href="#rankings">Rankings</a>
+            <a href="#usps">USPs</a>
+            <a href="#labs">Infrastructure</a>
+            <a href="#faculty">Faculty</a>
+            <a href="#placements">Placements</a>
+            <a href="#research">Research</a>
+            <a href="#contact" class="nav-cta">Visit Campus</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+    <button class="mobile-close" id="mobileCloseBtn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    <div class="mobile-links">
+        <a href="#highlights" class="mob-link">Highlights</a>
+        <a href="#rankings" class="mob-link">Rankings</a>
+        <a href="#usps" class="mob-link">USPs</a>
+        <a href="#labs" class="mob-link">Infrastructure</a>
+        <a href="#faculty" class="mob-link">Faculty</a>
+        <a href="#placements" class="mob-link">Placements</a>
+        <a href="#research" class="mob-link">Research</a>
+        <a href="#contact" class="mob-link" style="color:#dc2626;font-weight:700;">Visit Campus</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge anim">
+                <div class="hero-badge-dot"></div>
+                <span>India's No.1 Private University</span>
+            </div>
+            <h1 class="anim delay-1">Department of<br><span class="highlight">Mechanical</span><br>Engineering</h1>
+            <p class="hero-desc anim delay-2">Guiding the future Engineers through innovation, precision and sustainable solutions. NBA & ABET Accredited with 400+ Patents filed.</p>
+            <div class="hero-btns anim delay-3">
+                <a href="#highlights" class="btn-primary">Explore Department <i class="fas fa-arrow-right"></i></a>
+                <a href="#placements" class="btn-secondary">View Placements</a>
+            </div>
+            <div class="hero-stats anim delay-4">
+                <div>
+                    <div class="hero-stat-num"><span class="counter" data-target="400">0</span><span>+</span></div>
+                    <div class="hero-stat-label">Patents Filed</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div>
+                    <div class="hero-stat-num"><span class="counter" data-target="421">0</span><span>+</span></div>
+                    <div class="hero-stat-label">Publications</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div>
+                    <div class="hero-stat-num"><span class="counter" data-target="12">0</span><span> LPA</span></div>
+                    <div class="hero-stat-label">Highest Package</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual anim-right delay-2">
+            <div class="hero-image-wrapper">
+                <img src="https://picsum.photos/seed/cu-mech-lab-hero/600/600.jpg" alt="Mechanical Lab">
+                <div class="hero-image-overlay"></div>
+                <div class="hero-image-info">
+                    <div class="label">Established 2012</div>
+                    <div class="title">Chandigarh University</div>
+                    <div class="sub">Gharuan, Mohali, Punjab</div>
+                </div>
+            </div>
+            <div class="float-badge float-badge-1">
+                <div class="fb-icon" style="background:rgba(220,38,38,.15);color:#dc2626"><i class="fas fa-award"></i></div>
+                <div class="fb-label">NAAC</div>
+                <div class="fb-value">A+ Grade</div>
+            </div>
+            <div class="float-badge float-badge-2">
+                <div class="fb-icon" style="background:rgba(234,179,8,.15);color:#eab308"><i class="fas fa-globe"></i></div>
+                <div class="fb-label">ABET</div>
+                <div class="fb-value">Accredited</div>
+            </div>
+            <div class="float-badge float-badge-3">
+                <div class="fb-icon" style="background:rgba(34,197,94,.15);color:#22c55e"><i class="fas fa-ranking-star"></i></div>
+                <div class="fb-label">QS 2025</div>
+                <div class="fb-value">Top 3 India</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span>VOLVO-EICHER</span><span class="dot">&#9679;</span>
+        <span>HONDA</span><span class="dot">&#9679;</span>
+        <span>MG MOTORS</span><span class="dot">&#9679;</span>
+        <span>AMAZON</span><span class="dot">&#9679;</span>
+        <span>TESLA</span><span class="dot">&#9679;</span>
+        <span>DRDO</span><span class="dot">&#9679;</span>
+        <span>ISRO</span><span class="dot">&#9679;</span>
+        <span>DAIKIN</span><span class="dot">&#9679;</span>
+        <span>HYUNDAI</span><span class="dot">&#9679;</span>
+        <span>L&T</span><span class="dot">&#9679;</span>
+        <span>MAHINDRA</span><span class="dot">&#9679;</span>
+        <span>ASHOK LEYLAND</span><span class="dot">&#9679;</span>
+        <span>ALSTOM</span><span class="dot">&#9679;</span>
+        <span>GODREJ</span><span class="dot">&#9679;</span>
+        <span>MICROSOFT</span><span class="dot">&#9679;</span>
+        <span>GENERAL ELECTRIC</span><span class="dot">&#9679;</span>
+        <span>VOLVO-EICHER</span><span class="dot">&#9679;</span>
+        <span>HONDA</span><span class="dot">&#9679;</span>
+        <span>MG MOTORS</span><span class="dot">&#9679;</span>
+        <span>AMAZON</span><span class="dot">&#9679;</span>
+        <span>TESLA</span><span class="dot">&#9679;</span>
+        <span>DRDO</span><span class="dot">&#9679;</span>
+        <span>ISRO</span><span class="dot">&#9679;</span>
+        <span>DAIKIN</span><span class="dot">&#9679;</span>
+        <span>HYUNDAI</span><span class="dot">&#9679;</span>
+        <span>L&T</span><span class="dot">&#9679;</span>
+        <span>MAHINDRA</span><span class="dot">&#9679;</span>
+        <span>ASHOK LEYLAND</span><span class="dot">&#9679;</span>
+        <span>ALSTOM</span><span class="dot">&#9679;</span>
+        <span>GODREJ</span><span class="dot">&#9679;</span>
+        <span>MICROSOFT</span><span class="dot">&#9679;</span>
+        <span>GENERAL ELECTRIC</span><span class="dot">&#9679;</span>
+    </div>
+</div>
+
+<!-- KEY HIGHLIGHTS -->
+<section class="section" id="highlights">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">At a Glance</div>
+            <h2 class="section-title">Key <span class="highlight">Highlights</span></h2>
+            <p class="section-desc">Excellence in Engineering Education & Innovation — backed by numbers that speak for themselves</p>
+        </div>
+        <div class="grid-4">
+            <div class="card anim delay-1">
+                <div class="card-icon red"><i class="fas fa-file-shield"></i></div>
+                <div class="card-num"><span class="counter" data-target="400">0</span><span>+</span></div>
+                <div class="card-label">Patents Filed</div>
+                <div style="margin-top:12px">
+                    <div style="height:6px;background:rgba(255,255,255,.05);border-radius:10px;overflow:hidden">
+                        <div class="progress-bar" style="width:0;height:100%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:10px;transition:width 1.5s ease" data-width="95%"></div>
+                    </div>
+                    <div style="font-size:11px;color:#666;margin-top:6px">Highest in University</div>
+                </div>
+            </div>
+            <div class="card anim delay-2">
+                <div class="card-icon green"><i class="fas fa-book-open"></i></div>
+                <div class="card-num"><span class="counter" data-target="421">0</span><span>+</span></div>
+                <div class="card-label">Research Publications</div>
+                <div class="card-tags">
+                    <span class="card-tag green">SCI: 120+</span>
+                    <span class="card-tag blue">SCOPUS: 300+</span>
+                </div>
+            </div>
+            <div class="card anim delay-3">
+                <div class="card-icon yellow"><i class="fas fa-indian-rupee-sign"></i></div>
+                <div class="card-num"><span class="counter" data-target="80">0</span><span> Lacs</span></div>
+                <div class="card-label">Research Grants (Since 2017)</div>
+                <div style="font-size:12px;color:#666;margin-top:8px">+ 18.59 Lacs Consultancy</div>
+            </div>
+            <div class="card anim delay-4">
+                <div class="card-icon purple"><i class="fas fa-users"></i></div>
+                <div class="card-num"><span class="counter" data-target="70">0</span><span>%+</span></div>
+                <div class="card-label">Placement Rate</div>
+                <div class="card-tags">
+                    <span class="card-tag red">Avg: 5 LPA</span>
+                    <span class="card-tag yellow">Max: 12 LPA</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RANKINGS -->
+<section class="section" id="rankings">
+    <div class="section-inner">
+        <div class="grid-2" style="gap:60px;align-items:start">
+            <div class="anim-left">
+                <div class="section-tag">Global Recognition</div>
+                <h2 class="section-title" style="text-align:left;margin-bottom:16px">Rankings & <span class="highlight">Accreditations</span></h2>
+                <p class="section-desc" style="margin:0 0 32px 0;text-align:left">Chandigarh University has achieved momentous milestones, solidifying its position as India's No.1 Private University.</p>
+                <div class="grid-3">
+                    <div style="background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center">
+                        <div style="font-size:28px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">A+</div>
+                        <div style="font-size:11px;color:#777;margin-top:4px">NAAC Grade</div>
+                    </div>
+                    <div style="background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center">
+                        <div style="font-size:28px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">6</div>
+                        <div style="font-size:11px;color:#777;margin-top:4px">NBA Programs</div>
+                    </div>
+                    <div style="background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center">
+                        <div style="font-size:28px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">0.1%</div>
+                        <div style="font-size:11px;color:#777;margin-top:4px">Top ABET</div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline anim-right">
+                <div class="timeline-line"></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2019</div><div class="timeline-text">Bestowed with A+ Accreditation by NAAC</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2020</div><div class="timeline-text">1st University to receive Diamond Rating in all Primary Categories in Punjab</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2021</div><div class="timeline-text">Selected as GATI Charter Institution; Ranked #1 for highest patents filed</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2022</div><div class="timeline-text">Only University in Punjab with NBA accreditation for 9 Engineering programs</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2023</div><div class="timeline-text">Among Top 0.1% Indian Universities with ABET accredited programs</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2024</div><div class="timeline-text">6 Engineering programs Re-accredited by NBA for 2024-27</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- USPs -->
+<section class="section" id="usps">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Why Choose Us</div>
+            <h2 class="section-title">Program <span class="highlight">USPs</span></h2>
+        </div>
+        <div class="grid-3">
+            <div class="card anim delay-1">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#dc2626">01</div>
+                    <h3 style="font-size:16px;font-weight:700">Industry-Aligned Curriculum</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">Cutting-edge curriculum integrating AI, Industry 4.0, Robotics, and Sustainable Engineering with specialized tracks.</p>
+                <div class="card-tags"><span class="card-tag red">AI/ML</span><span class="card-tag red">Industry 4.0</span><span class="card-tag red">CAD/ANSYS</span></div>
+            </div>
+            <div class="card anim delay-2">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(34,197,94,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#22c55e">02</div>
+                    <h3 style="font-size:16px;font-weight:700">World-Class Labs</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">Centers of Excellence with Volvo-Eicher, Honda. Advanced 3D Printing, FMS, and SEM/XRD Testing facilities.</p>
+                <div class="card-tags"><span class="card-tag green">3D Printing</span><span class="card-tag green">FMS</span><span class="card-tag green">SEM/XRD</span></div>
+            </div>
+            <div class="card anim delay-3">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(234,179,8,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#eab308">03</div>
+                    <h3 style="font-size:16px;font-weight:700">Strong Placements</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">75%+ Placement Rate, Highest 12 LPA, 150+ Top Recruiters. MoUs with Volvo-Eicher, Honda, MG Motors, PEDA.</p>
+                <div class="card-tags"><span class="card-tag yellow">150+ Recruiters</span><span class="card-tag yellow">15% YoY Growth</span></div>
+            </div>
+            <div class="card anim delay-4">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(168,85,247,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#a855f7">04</div>
+                    <h3 style="font-size:16px;font-weight:700">Research Leadership</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">400+ Student Patents, 421+ Publications. Dedicated IPR & Incubation Center supporting 150+ Startups.</p>
+                <div class="card-tags"><span class="card-tag red">IPR Center</span><span class="card-tag red">150+ Startups</span></div>
+            </div>
+            <div class="card anim delay-5">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(59,130,246,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#3b82f6">05</div>
+                    <h3 style="font-size:16px;font-weight:700">Global Recognition</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">Ranked Top 3 in India (QS 2025). 6-Year ABET & NBA Accreditation ensuring global academic standards.</p>
+                <div class="card-tags"><span class="card-tag blue">QS Top 3</span><span class="card-tag blue">ABET 6-Year</span></div>
+            </div>
+            <div class="card anim delay-6">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px">
+                    <div style="width:36px;height:36px;border-radius:8px;background:rgba(236,72,153,.1);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#ec4899">06</div>
+                    <h3 style="font-size:16px;font-weight:700">Alumni Power</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.7;margin-bottom:14px">Alumni at Amazon US, Tesla, DRDO, ISRO, Fortune 500 companies. 10+ Alumni Startups across industries.</p>
+                <div class="card-tags"><span class="card-tag red">Tesla</span><span class="card-tag red">Amazon</span><span class="card-tag red">DRDO</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CENTERS OF EXCELLENCE -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Industry Integration</div>
+            <h2 class="section-title">Centers of <span class="highlight">Excellence</span></h2>
+        </div>
+        <div class="grid-2" style="gap:24px;margin-bottom:32px">
+            <div class="img-card anim-left">
+                <img src="https://picsum.photos/seed/honda-rd-center/700/300.jpg" alt="Honda CoE">
+                <div class="img-card-body">
+                    <div class="img-card-label">Honda CoE</div>
+                    <div class="img-card-title">Honda Research & Skill Development Centre</div>
+                    <ul class="check-list" style="margin-top:12px">
+                        <li><i class="fas fa-check-circle"></i>Live Workshops from Industry Experts</li>
+                        <li><i class="fas fa-check-circle"></i>Hands-on Practice for Students</li>
+                        <li><i class="fas fa-check-circle"></i>Research on Blended Fuel Efficiency</li>
+                        <li><i class="fas fa-check-circle"></i>Two Wheeler Servicing & Diagnostics</li>
+                        <li><i class="fas fa-check-circle"></i>Engine Emissions Control</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="img-card anim-right">
+                <img src="https://picsum.photos/seed/volvo-eicher-coe/700/300.jpg" alt="Volvo Eicher CoE">
+                <div class="img-card-body">
+                    <div class="img-card-label" style="color:#eab308">Volvo-Eicher CoE</div>
+                    <div class="img-card-title">Volvo-Eicher CU Centre of Excellence</div>
+                    <ul class="check-list" style="margin-top:12px">
+                        <li><i class="fas fa-check-circle"></i>Live Workshops from Industry Experts</li>
+                        <li><i class="fas fa-check-circle"></i>Hands-on Practice for Students</li>
+                        <li><i class="fas fa-check-circle"></i>Research on Blended Fuel Efficiency</li>
+                        <li><i class="fas fa-check-circle"></i>Heavy Diesel Engine BS-VI Technique</li>
+                        <li><i class="fas fa-check-circle"></i>BS-VI Engine Emissions Control</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="grid-3">
+            <div class="card anim delay-1" style="text-align:center">
+                <div style="width:52px;height:52px;border-radius:12px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-cogs" style="font-size:22px;color:#dc2626"></i></div>
+                <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">ASME Student Chapter</h4>
+                <p style="font-size:11px;color:#777">American Society of Mechanical Engineers</p>
+            </div>
+            <div class="card anim delay-2" style="text-align:center">
+                <div style="width:52px;height:52px;border-radius:12px;background:rgba(59,130,246,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-snowflake" style="font-size:22px;color:#3b82f6"></i></div>
+                <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">ASHRAE Student Branch</h4>
+                <p style="font-size:11px;color:#777">Heating, Refrigerating & AC Engineers</p>
+            </div>
+            <div class="card anim delay-3" style="text-align:center">
+                <div style="width:52px;height:52px;border-radius:12px;background:rgba(34,197,94,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-landmark" style="font-size:22px;color:#22c55e"></i></div>
+                <h4 style="font-size:15px;font-weight:700;margin-bottom:4px">IEI Student Chapter</h4>
+                <p style="font-size:11px;color:#777">Institution of Engineers, India</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- LABS & INFRASTRUCTURE -->
+<section class="section" id="labs">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">State of the Art</div>
+            <h2 class="section-title">Labs & <span class="highlight">Infrastructure</span></h2>
+        </div>
+        <div class="tabs anim">
+            <button class="tab-btn active" data-tab="fms">FMS Lab</button>
+            <button class="tab-btn" data-tab="semxrd">SEM & XRD</button>
+            <button class="tab-btn" data-tab="3dprint">3D Printing</button>
+            <button class="tab-btn" data-tab="software">Software Labs</button>
+        </div>
+        <div class="tab-panel active" id="panel-fms">
+            <div class="grid-2" style="gap:32px;align-items:center">
+                <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/9">
+                    <img src="https://picsum.photos/seed/fms-robotics-lab/800/450.jpg" alt="FMS Lab" style="width:100%;height:100%;object-fit:cover;display:block">
+                </div>
+                <div>
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Flexible Manufacturing System Lab</h3>
+                    <p style="font-size:14px;color:#888;line-height:1.7;margin-bottom:20px">Combines CNC technology, robotics, and materials handling to automate production. Designed to be adaptable to changes in type and quantity of goods produced.</p>
+                    <div class="grid-2" style="gap:10px">
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-robot" style="color:#dc2626"></i><span style="font-size:13px">CNC & Robot Programming</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-industry" style="color:#dc2626"></i><span style="font-size:13px">Industrial Applications</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-laptop-code" style="color:#dc2626"></i><span style="font-size:13px">Computer-Aided Production</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-project-diagram" style="color:#dc2626"></i><span style="font-size:13px">System Modeling</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-semxrd">
+            <div class="grid-2" style="gap:32px;align-items:center">
+                <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/9">
+                    <img src="https://picsum.photos/seed/sem-xrd-microscope/800/450.jpg" alt="SEM XRD" style="width:100%;height:100%;object-fit:cover;display:block">
+                </div>
+                <div>
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:12px">SEM & XRD Research Facility</h3>
+                    <p style="font-size:14px;color:#888;line-height:1.7;margin-bottom:20px">Advanced characterization facility at UCRD for material research and analysis.</p>
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                        <div style="padding:16px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px">
+                            <h4 style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px">SEM (Scanning Electron Microscope)</h4>
+                            <p style="font-size:12px;color:#888;line-height:1.6">Creates surface topography images using focused electron beam with EDS for elemental composition analysis.</p>
+                        </div>
+                        <div style="padding:16px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px">
+                            <h4 style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px">XRD (X-Ray Diffraction)</h4>
+                            <p style="font-size:12px;color:#888;line-height:1.6">Identifies crystalline phases by analyzing diffraction patterns from X-ray and crystal lattice interaction.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-3dprint">
+            <div class="grid-2" style="gap:32px;align-items:center">
+                <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/9">
+                    <img src="https://picsum.photos/seed/3d-printing-mech/800/450.jpg" alt="3D Printing" style="width:100%;height:100%;object-fit:cover;display:block">
+                </div>
+                <div>
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:12px">3D Printing Lab</h3>
+                    <p style="font-size:14px;color:#888;line-height:1.7;margin-bottom:20px">State-of-the-art facility dedicated to fostering innovation and prototyping at UCRD supporting both SLA and FDM technologies.</p>
+                    <div class="grid-2" style="gap:10px">
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-cube" style="color:#dc2626"></i><span style="font-size:13px">SLA Printing</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-layer-group" style="color:#dc2626"></i><span style="font-size:13px">FDM Printing</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-lightbulb" style="color:#dc2626"></i><span style="font-size:13px">Prototyping</span></div>
+                        <div style="display:flex;align-items:center;gap:10px;padding:12px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:10px"><i class="fas fa-flask" style="color:#dc2626"></i><span style="font-size:13px">Material Research</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-software">
+            <div class="grid-2" style="gap:32px;align-items:center">
+                <div style="border-radius:16px;overflow:hidden;aspect-ratio:16/9">
+                    <img src="https://picsum.photos/seed/cae-software-lab/800/450.jpg" alt="Software Labs" style="width:100%;height:100%;object-fit:cover;display:block">
+                </div>
+                <div>
+                    <h3 style="font-size:22px;font-weight:800;margin-bottom:12px">Software Labs (CAE/CAD)</h3>
+                    <p style="font-size:14px;color:#888;line-height:1.7;margin-bottom:20px">Equipped with industry-standard licenses for high-end simulation and virtual prototyping.</p>
+                    <div style="display:flex;flex-wrap:wrap;gap:10px">
+                        <div style="padding:14px 20px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#dc2626">ANSYS</div><div style="font-size:10px;color:#777;margin-top:2px">FEA/CFD</div></div>
+                        <div style="padding:14px 20px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#3b82f6">CREO</div><div style="font-size:10px;color:#777;margin-top:2px">CAD/CAM</div></div>
+                        <div style="padding:14px 20px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#eab308">MATLAB</div><div style="font-size:10px;color:#777;margin-top:2px">Simulink</div></div>
+                        <div style="padding:14px 20px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#22c55e">AutoCAD</div><div style="font-size:10px;color:#777;margin-top:2px">Drafting</div></div>
+                        <div style="padding:14px 20px;background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#a855f7">SolidWorks</div><div style="font-size:10px;color:#777;margin-top:2px">Modeling</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACADEMIC EXCELLENCE -->
+<section class="section">
+    <div class="section-inner">
+        <div class="grid-2" style="gap:48px;align-items:start">
+            <div class="anim-left">
+                <div class="section-tag">NEP 2020 Aligned</div>
+                <h2 class="section-title" style="text-align:left;margin-bottom:24px">Academic <span class="highlight">Excellence</span></h2>
+                <div style="display:flex;flex-direction:column;gap:14px">
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(220,38,38,.1);color:#dc2626"><i class="fas fa-book"></i></div>
+                        <div><div class="feature-title">Curriculum Framework</div><div class="feature-desc">NEP aligned, Futuristic Curriculum, Benchmarking, Stakeholders' Feedback</div></div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(34,197,94,.1);color:#22c55e"><i class="fas fa-bullseye"></i></div>
+                        <div><div class="feature-title">OBE Attainment & Mappings</div><div class="feature-desc">National/Global Needs, CO, PO, PSO, PEO & PDCA cycle integration</div></div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(234,179,8,.1);color:#eab308"><i class="fas fa-scale-balanced"></i></div>
+                        <div><div class="feature-title">Regulatory Compliance</div><div class="feature-desc">Credits, Multiple Entry Exit, CBCS, IKS, SDGs, IDC/MDC per NEP 2020</div></div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(168,85,247,.1);color:#a855f7"><i class="fas fa-graduation-cap"></i></div>
+                        <div><div class="feature-title">Skill Enhancement</div><div class="feature-desc">Professional Certifications, Capstone Projects, Social Internship, Open Electives</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="anim-right">
+                <div style="background:#141414;border:1px solid rgba(220,38,38,.15);border-radius:16px;padding:28px;margin-bottom:20px">
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
+                        <div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#dc2626,#991b1b);display:flex;align-items:center;justify-content:center"><i class="fas fa-brain" style="font-size:20px;color:#fff"></i></div>
+                        <div><div style="font-size:18px;font-weight:700">AI Integration Plan</div><div style="font-size:12px;color:#777">AI-Designed Curriculum</div></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                        <div style="padding:14px;background:#0c0c0c;border:1px solid rgba(255,255,255,.06);border-radius:10px">
+                            <span style="padding:3px 8px;background:rgba(220,38,38,.15);color:#dc2626;font-size:10px;font-weight:700;border-radius:4px">SEMESTER 1</span>
+                            <div style="font-size:14px;font-weight:600;margin-top:8px">AI in Engineering and Industry</div>
+                            <div style="font-size:11px;color:#777;margin-top:2px">Foundation course introducing AI in engineering</div>
+                        </div>
+                        <div style="padding:14px;background:#0c0c0c;border:1px solid rgba(255,255,255,.06);border-radius:10px">
+                            <span style="padding:3px 8px;background:rgba(234,179,8,.15);color:#eab308;font-size:10px;font-weight:700;border-radius:4px">SEMESTER 2</span>
+                            <div style="font-size:14px;font-weight:600;margin-top:8px">Applications of AI in Mechanical Systems</div>
+                            <div style="font-size:11px;color:#777;margin-top:2px">Advanced AI/ML for core mechanical applications</div>
+                        </div>
+                        <div style="padding:14px;background:#0c0c0c;border:1px solid rgba(255,255,255,.06);border-radius:10px">
+                            <span style="padding:3px 8px;background:rgba(168,85,247,.15);color:#a855f7;font-size:10px;font-weight:700;border-radius:4px">SEMESTER 4-6</span>
+                            <div style="font-size:14px;font-weight:600;margin-top:8px">Mandatory AI & ML Modules</div>
+                            <div style="font-size:11px;color:#777;margin-top:2px">Industry 4.0 and Smart Manufacturing readiness</div>
+                        </div>
+                    </div>
+                </div>
+                <div style="background:#141414;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px">
+                    <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">Proposed Multidisciplinary Labs</h3>
+                    <div style="display:flex;flex-direction:column;gap:10px">
+                        <div style="padding:12px;background:#0c0c0c;border:1px solid rgba(255,255,255,.06);border-radius:10px">
+                            <div style="font-size:13px;font-weight:700;color:#dc2626">Research Methodology Lab</div>
+                            <div style="font-size:11px;color:#777;margin-top:4px">SPSS, Minitab, Design Expert, R, GPU Workstations, Smart Whiteboards</div>
+                        </div>
+                        <div style="padding:12px;background:#0c0c0c;border:1px solid rgba(255,255,255,.06);border-radius:10px">
+                            <div style="font-size:13px;font-weight:700;color:#eab308">Modelling & Simulation Lab</div>
+                            <div style="font-size:11px;color:#777;margin-top:4px">MATLAB/Simulink, ANSYS, COMSOL, VR/AR Headsets, Digital Twins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FACULTY -->
+<section class="section" id="faculty">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Mentors & Guides</div>
+            <h2 class="section-title">Faculty <span class="highlight">Excellence</span></h2>
+            <p class="section-desc">90%+ PhD Faculty with 15+ years of teaching and industry experience</p>
+        </div>
+        <div class="grid-3" style="margin-bottom:40px">
+            <div class="badge-box anim delay-1"><div class="big">90%+</div><div class="small">PhD Qualified Faculty</div></div>
+            <div class="badge-box anim delay-2"><div class="big">80+</div><div class="small">Patents Filed (Previous Session)</div></div>
+            <div class="badge-box anim delay-3"><div class="big">Top 2%</div><div class="small">Stanford Global Scientists List</div></div>
+        </div>
+        <div class="grid-3" style="margin-bottom:40px">
+            <div class="card anim delay-1" style="text-align:center">
+                <div class="avatar" style="background:linear-gradient(135deg,#dc2626,#991b1b);margin:0 auto 14px">RS</div>
+                <h3 style="font-size:17px;font-weight:700">Dr. Rupinder Singh</h3>
+                <p style="font-size:12px;color:#dc2626;font-weight:600;margin:4px 0 8px">Top 2% Scientist, Stanford Elsevier</p>
+                <p style="font-size:11px;color:#777;margin-bottom:12px">Specialization: Production Engineering</p>
+                <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(220,38,38,.08);border-radius:8px"><i class="fas fa-file-alt" style="color:#dc2626;font-size:12px"></i><span style="font-size:13px;font-weight:700">90 Publications</span></div>
+            </div>
+            <div class="card anim delay-2" style="text-align:center">
+                <div class="avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a);margin:0 auto 14px">JS</div>
+                <h3 style="font-size:17px;font-weight:700">Dr. Jagjit Singh</h3>
+                <p style="font-size:12px;color:#22c55e;font-weight:600;margin:4px 0 8px">Best Faculty & Leadership Award, CU</p>
+                <p style="font-size:11px;color:#777;margin-bottom:12px">Specialization: Biomedical Engineering</p>
+                <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(34,197,94,.08);border-radius:8px"><i class="fas fa-file-alt" style="color:#22c55e;font-size:12px"></i><span style="font-size:13px;font-weight:700">40+ Publications</span></div>
+            </div>
+            <div class="card anim delay-3" style="text-align:center">
+                <div class="avatar" style="background:linear-gradient(135deg,#eab308,#ca8a04);margin:0 auto 14px">RT</div>
+                <h3 style="font-size:17px;font-weight:700">Dr. Ravinder Tonk</h3>
+                <p style="font-size:12px;color:#eab308;font-weight:600;margin:4px 0 8px">Best Performer 2025, Patent Specialist</p>
+                <p style="font-size:11px;color:#777;margin-bottom:12px">Specialization: Production Engineering</p>
+                <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(234,179,8,.08);border-radius:8px"><i class="fas fa-file-alt" style="color:#eab308;font-size:12px"></i><span style="font-size:13px;font-weight:700">25+ Publications</span></div>
+            </div>
+        </div>
+        <div class="card anim" style="padding:32px">
+            <h3 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:20px">Key Research Areas</h3>
+            <div class="pill-row">
+                <div class="pill"><i class="fas fa-bolt" style="color:#dc2626"></i>Electric Vehicles (BMS & Thermal)</div>
+                <div class="pill"><i class="fas fa-layer-group" style="color:#22c55e"></i>Advanced Composite Materials</div>
+                <div class="pill"><i class="fas fa-robot" style="color:#3b82f6"></i>Industrial Robotics & Automation</div>
+                <div class="pill"><i class="fas fa-solar-panel" style="color:#eab308"></i>Sustainable Energy Systems</div>
+                <div class="pill"><i class="fas fa-motorcycle" style="color:#a855f7"></i>Smart Mobility Solutions</div>
+                <div class="pill"><i class="fas fa-brain" style="color:#ec4899"></i>AI/ML in Engineering</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PLACEMENTS -->
+<section class="section" id="placements">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Career Success</div>
+            <h2 class="section-title">Placement <span class="highlight">Overview</span></h2>
+            <p class="section-desc">100+ core engineering companies visited campus offering diverse roles in R&D, Design, Manufacturing & Technical Sales</p>
+        </div>
+        <div class="grid-4" style="margin-bottom:40px">
+            <div class="card anim delay-1" style="text-align:center;border-color:rgba(220,38,38,.2);background:linear-gradient(135deg,rgba(220,38,38,.08),#141414)">
+                <div style="font-size:10px;color:#dc2626;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Highest International</div>
+                <div style="font-size:36px;font-weight:900">1.3 Cr</div>
+                <div style="font-size:12px;color:#888;margin-top:4px">Amazon UK</div>
+            </div>
+            <div class="card anim delay-2" style="text-align:center;border-color:rgba(234,179,8,.2);background:linear-gradient(135deg,rgba(234,179,8,.08),#141414)">
+                <div style="font-size:10px;color:#eab308;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Highest Domestic</div>
+                <div style="font-size:36px;font-weight:900">12 LPA</div>
+                <div style="font-size:12px;color:#888;margin-top:4px">Energy Exemplar</div>
+            </div>
+            <div class="card anim delay-3" style="text-align:center;border-color:rgba(34,197,94,.2);background:linear-gradient(135deg,rgba(34,197,94,.08),#141414)">
+                <div style="font-size:10px;color:#22c55e;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Average Package</div>
+                <div style="font-size:36px;font-weight:900">5 LPA</div>
+                <div style="font-size:12px;color:#888;margin-top:4px">15% Y-o-Y Growth</div>
+            </div>
+            <div class="card anim delay-4" style="text-align:center;border-color:rgba(59,130,246,.2);background:linear-gradient(135deg,rgba(59,130,246,.08),#141414)">
+                <div style="font-size:10px;color:#3b82f6;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px">Placement Rate</div>
+                <div style="font-size:36px;font-weight:900">70%+</div>
+                <div style="font-size:12px;color:#888;margin-top:4px">Core Engineering</div>
+            </div>
+        </div>
+        <div style="margin-bottom:40px" class="anim">
+            <h3 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:20px">Top Industry Partners</h3>
+            <div class="recruiter-grid">
+                <div class="recruiter-item"><div class="name">Microsoft</div><div class="type">Tech</div></div>
+                <div class="recruiter-item"><div class="name">Amazon</div><div class="type">Logistics</div></div>
+                <div class="recruiter-item"><div class="name">Daikin</div><div class="type">HVAC</div></div>
+                <div class="recruiter-item"><div class="name">Hyundai</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Mahindra</div><div class="type">Auto/Farm</div></div>
+                <div class="recruiter-item"><div class="name">L&T</div><div class="type">Infrastructure</div></div>
+                <div class="recruiter-item"><div class="name">Escorts</div><div class="type">Farm Tech</div></div>
+                <div class="recruiter-item"><div class="name">Godrej</div><div class="type">Manufacturing</div></div>
+                <div class="recruiter-item"><div class="name">Alstom</div><div class="type">Transport</div></div>
+                <div class="recruiter-item"><div class="name">Ashok Leyland</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">High Radius</div><div class="type">Fintech</div></div>
+                <div class="recruiter-item"><div class="name">Energy Exemplar</div><div class="type">Software</div></div>
+            </div>
+        </div>
+        <div class="anim">
+            <h3 style="font-size:18px;font-weight:700;text-align:center;margin-bottom:20px">Star Placements — Recent Achievers</h3>
+            <div class="grid-4">
+                <div class="card anim delay-1" style="text-align:center">
+                    <div class="avatar" style="background:rgba(220,38,38,.15);color:#dc2626;margin:0 auto 10px">PS</div>
+                    <div style="font-size:15px;font-weight:700">Prabhasis Singh</div>
+                    <div style="font-size:16px;font-weight:800;color:#dc2626;margin:4px 0">12 LPA</div>
+                    <div style="font-size:11px;color:#777">Energy Market Analyst<br>Energy Exemplar India</div>
+                </div>
+                <div class="card anim delay-2" style="text-align:center">
+                    <div class="avatar" style="background:rgba(234,179,8,.15);color:#eab308;margin:0 auto 10px">SS</div>
+                    <div style="font-size:15px;font-weight:700">Shivam Singh</div>
+                    <div style="font-size:16px;font-weight:800;color:#eab308;margin:4px 0">10 LPA</div>
+                    <div style="font-size:11px;color:#777">Graduate Engineer Trainee<br>High Radius</div>
+                </div>
+                <div class="card anim delay-3" style="text-align:center">
+                    <div class="avatar" style="background:rgba(34,197,94,.15);color:#22c55e;margin:0 auto 10px">PC</div>
+                    <div style="font-size:15px;font-weight:700">Prashant Chaudhary</div>
+                    <div style="font-size:16px;font-weight:800;color:#22c55e;margin:4px 0">8 LPA</div>
+                    <div style="font-size:11px;color:#777">Engineer<br>Ashok Leyland Ltd.</div>
+                </div>
+                <div class="card anim delay-4" style="text-align:center">
+                    <div class="avatar" style="background:rgba(59,130,246,.15);color:#3b82f6;margin:0 auto 10px">GX</div>
+                    <div style="font-size:15px;font-weight:700">Galaxy</div>
+                    <div style="font-size:16px;font-weight:800;color:#3b82f6;margin:4px 0">7 LPA</div>
+                    <div style="font-size:11px;color:#777">Engineer<br>Alstom Transport India</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOTABLE ALUMNI -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <h2 class="section-title">Notable <span class="highlight">Alumni</span></h2>
+            <p class="section-desc">Global Ambassadors of Mechanical Engineering</p>
+        </div>
+        <div class="grid-4">
+            <div class="card anim delay-1" style="text-align:center">
+                <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#dc2626,#991b1b);margin:0 auto 14px">AG</div>
+                <h3 style="font-size:17px;font-weight:700">Akshay Gandhi</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:6px">Batch 2018</p>
+                <div style="font-size:20px;font-weight:900;color:#dc2626">1.3 Cr</div>
+                <p style="font-size:13px;color:#aaa;margin-top:4px">Amazon UK</p>
+            </div>
+            <div class="card anim delay-2" style="text-align:center">
+                <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#ef4444,#f87171);margin:0 auto 14px">KR</div>
+                <h3 style="font-size:17px;font-weight:700">Kshitij Rasal</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:6px">Batch 2019</p>
+                <div style="font-size:14px;font-weight:700;color:#ef4444">Senior Design Engineer</div>
+                <p style="font-size:13px;color:#aaa;margin-top:4px">Tesla USA</p>
+            </div>
+            <div class="card anim delay-3" style="text-align:center">
+                <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#3b82f6,#60a5fa);margin:0 auto 14px">MM</div>
+                <h3 style="font-size:17px;font-weight:700">Mir Muaviz</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:6px">Batch 2020</p>
+                <div style="font-size:14px;font-weight:700;color:#3b82f6">Thermal Systems Analyst</div>
+                <p style="font-size:13px;color:#aaa;margin-top:4px">General Electric (GE)</p>
+            </div>
+            <div class="card anim delay-4" style="text-align:center">
+                <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#22c55e,#4ade80);margin:0 auto 14px">HG</div>
+                <h3 style="font-size:17px;font-weight:700">Harshit Goyal</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:6px">Batch 2016</p>
+                <div style="font-size:14px;font-weight:700;color:#22c55e">Entrepreneur</div>
+                <p style="font-size:13px;color:#aaa;margin-top:4px">Founder, Savita Forging</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INTERNATIONALIZATION -->
+<section class="section">
+    <div class="section-inner">
+        <div class="grid-2" style="gap:48px;align-items:start">
+            <div class="anim-left">
+                <div class="section-tag">Global Footprint</div>
+                <h2 class="section-title" style="text-align:left;margin-bottom:24px">Internationalization & <span class="highlight">Global Mobility</span></h2>
+                <div style="display:flex;flex-direction:column;gap:18px">
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(59,130,246,.1);color:#3b82f6"><i class="fas fa-exchange-alt"></i></div>
+                        <div><div class="feature-title">Student Exchange Programs</div><div class="feature-desc">Semester-long with Arkansas State University (USA) & Christian Brothers University (USA) with full credit transfer</div></div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(220,38,38,.1);color:#dc2626"><i class="fas fa-flask"></i></div>
+                        <div><div class="feature-title">Global Internships</div><div class="feature-desc">Research internships at prestigious institutions like National Sun-Yat-Sen University, Taiwan</div></div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon" style="background:rgba(234,179,8,.1);color:#eab308"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <div><div class="feature-title">Global Faculty</div><div class="feature-desc">International lecture series & joint research with Concordia University (Canada) & Curtin University (Dubai)</div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="anim-right" style="display:flex;flex-direction:column;gap:16px">
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+                        <div class="avatar" style="background:linear-gradient(135deg,#dc2626,#991b1b);width:44px;height:44px;font-size:14px">AC</div>
+                        <div><div style="font-size:14px;font-weight:700">Anurag Chakraborty</div><div style="font-size:11px;color:#777">21BME1160 | TEEP Program</div></div>
+                    </div>
+                    <p style="font-size:13px;color:#888;line-height:1.6">Research internship at National Sun-Yat-Sen University, Taiwan (June 2025)</p>
+                </div>
+                <div class="card">
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px">
+                        <div class="avatar" style="background:linear-gradient(135deg,#3b82f6,#2563eb);width:44px;height:44px;font-size:14px">SN</div>
+                        <div><div style="font-size:14px;font-weight:700">S M Nafis Ahmad</div><div style="font-size:11px;color:#777">23BME10009 | ASME Scholarship</div></div>
+                    </div>
+                    <p style="font-size:13px;color:#888;line-height:1.6">Awarded ASME Petroleum Division Scholarship of <span style="color:#dc2626;font-weight:700">USD 3,200</span> (2026)</p>
+                </div>
+                <div class="card" style="padding:20px">
+                    <div class="grid-3" style="text-align:center">
+                        <div><div style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">02</div><div style="font-size:11px;color:#777;margin-top:2px">Transfer Programs</div></div>
+                        <div><div style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">08</div><div style="font-size:11px;color:#777;margin-top:2px">Visiting Professors</div></div>
+                        <div><div style="font-size:24px;font-weight:800;background:linear-gradient(135deg,#dc2626,#ef4444);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">12:1</div><div style="font-size:11px;color:#777;margin-top:2px">Student-Faculty Ratio</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STUDENT ACHIEVEMENTS -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Beyond Academics</div>
+            <h2 class="section-title">Student <span class="highlight">Achievements</span></h2>
+        </div>
+        <div class="grid-3" style="margin-bottom:32px">
+            <div class="card anim delay-1" style="border-color:rgba(220,38,38,.2)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                    <div class="card-icon red"><i class="fas fa-trophy"></i></div>
+                    <h3 style="font-size:16px;font-weight:700">ASME Brain Bolt 2025</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.6">Proud winners in the ASME competition held in Hyderabad, India</p>
+            </div>
+            <div class="card anim delay-2" style="border-color:rgba(234,179,8,.2)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                    <div class="card-icon yellow"><i class="fas fa-medal"></i></div>
+                    <h3 style="font-size:16px;font-weight:700">Tekathon Winners</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.6">National-level winners in robotics and drone design competitions</p>
+            </div>
+            <div class="card anim delay-3" style="border-color:rgba(34,197,94,.2)">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                    <div class="card-icon green"><i class="fas fa-certificate"></i></div>
+                    <h3 style="font-size:16px;font-weight:700">Patent-A-Thon & Expo</h3>
+                </div>
+                <p style="font-size:13px;color:#888;line-height:1.6">Winners showcasing innovation and prototyping excellence</p>
+            </div>
+        </div>
+        <div class="card anim" style="padding:28px">
+            <h3 style="font-size:17px;font-weight:700;text-align:center;margin-bottom:18px">Events & Outreach</h3>
+            <div class="grid-2" style="gap:12px">
+                <div class="feature-row"><div class="feature-icon" style="background:rgba(59,130,246,.1);color:#3b82f6"><i class="fas fa-snowflake"></i></div><div><div class="feature-title">ASHRAE Student Branch</div><div class="feature-desc">Re-installation ceremony with top industry dignitaries</div></div></div>
+                <div class="feature-row"><div class="feature-icon" style="background:rgba(220,38,38,.1);color:#dc2626"><i class="fas fa-rocket"></i></div><div><div class="feature-title">Tech-A-Thon</div><div class="feature-desc">National-level participation in robotics and drone design</div></div></div>
+                <div class="feature-row"><div class="feature-icon" style="background:rgba(234,179,8,.1);color:#eab308"><i class="fas fa-microphone"></i></div><div><div class="feature-title">Expert Talks</div><div class="feature-desc">Weekly sessions by leaders from Daikin, Cheema Boilers, TCS</div></div></div>
+                <div class="feature-row"><div class="feature-icon" style="background:rgba(34,197,94,.1);color:#22c55e"><i class="fas fa-dumbbell"></i></div><div><div class="feature-title">Shivansh — CU MAKA Champion 2025</div><div class="feature-desc">Excelling in extra-curricular activities</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH & INNOVATION -->
+<section class="section" id="research">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Creating Impact</div>
+            <h2 class="section-title">Research & <span class="highlight">Innovation</span></h2>
+        </div>
+        <div class="grid-3" style="margin-bottom:40px">
+            <div class="badge-box anim delay-1"><div class="big">80+</div><div class="small">Patents Filed (Previous Session)</div></div>
+            <div class="badge-box anim delay-2"><div class="big">50+</div><div class="small">High-Impact SCI/Scopus Publications</div></div>
+            <div class="badge-box anim delay-3"><div class="big">Top 2%</div><div class="small">Stanford Elsevier Global Scientists</div></div>
+        </div>
+        <div class="grid-3" style="margin-bottom:40px">
+            <div class="img-card anim delay-1">
+                <div style="height:140px;background:linear-gradient(135deg,rgba(220,38,38,.15),rgba(220,38,38,.05));display:flex;align-items:center;justify-content:center"><i class="fas fa-motorcycle" style="font-size:48px;color:rgba(220,38,38,.3)"></i></div>
+                <div style="padding:20px">
+                    <span style="padding:3px 8px;background:rgba(220,38,38,.1);color:#dc2626;font-size:10px;font-weight:700;border-radius:4px">SMART MOBILITY</span>
+                    <h4 style="font-size:14px;font-weight:700;margin:8px 0 4px">Prevent Uncontrolled Movement for Two Wheelers</h4>
+                    <p style="font-size:11px;color:#777">Filed Patent — Safety innovation</p>
+                </div>
+            </div>
+            <div class="img-card anim delay-2">
+                <div style="height:140px;background:linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05));display:flex;align-items:center;justify-content:center"><i class="fas fa-brain" style="font-size:48px;color:rgba(168,85,247,.3)"></i></div>
+                <div style="padding:20px">
+                    <span style="padding:3px 8px;background:rgba(168,85,247,.1);color:#a855f7;font-size:10px;font-weight:700;border-radius:4px">AI SOLUTIONS</span>
+                    <h4 style="font-size:14px;font-weight:700;margin:8px 0 4px">Deepfake Detection Using AI & ML</h4>
+                    <p style="font-size:11px;color:#777">Interdisciplinary Project with CSE</p>
+                </div>
+            </div>
+            <div class="img-card anim delay-3">
+                <div style="height:140px;background:linear-gradient(135deg,rgba(34,197,94,.15),rgba(34,197,94,.05));display:flex;align-items:center;justify-content:center"><i class="fas fa-solar-panel" style="font-size:48px;color:rgba(34,197,94,.3)"></i></div>
+                <div style="padding:20px">
+                    <span style="padding:3px 8px;background:rgba(34,197,94,.1);color:#22c55e;font-size:10px;font-weight:700;border-radius:4px">SUSTAINABILITY</span>
+                    <h4 style="font-size:14px;font-weight:700;margin:8px 0 4px">Solar Powered Smart Cold Storage</h4>
+                    <p style="font-size:11px;color:#777">Working Prototype — For Farmers</p>
+                </div>
+            </div>
+        </div>
+        <div class="card anim" style="padding:32px;border-color:rgba(220,38,38,.15)">
+            <h3 style="font-size:20px;font-weight:800;text-align:center;margin-bottom:24px">Vision 2030 — Key Objectives</h3>
+            <div class="grid-4">
+                <div style="text-align:center;padding:16px">
+                    <div style="width:48px;height:48px;border-radius:12px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px"><i class="fas fa-graduation-cap" style="color:#dc2626;font-size:18px"></i></div>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:6px">Academic Excellence</h4>
+                    <p style="font-size:11px;color:#777;line-height:1.5">NAAC A++, M.E. in EV Tech, 100% faculty PhD</p>
+                </div>
+                <div style="text-align:center;padding:16px">
+                    <div style="width:48px;height:48px;border-radius:12px;background:rgba(34,197,94,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px"><i class="fas fa-flask" style="color:#22c55e;font-size:18px"></i></div>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:6px">Research Impact</h4>
+                    <p style="font-size:11px;color:#777;line-height:1.5">50% more funded projects, 10 patents commercialized</p>
+                </div>
+                <div style="text-align:center;padding:16px">
+                    <div style="width:48px;height:48px;border-radius:12px;background:rgba(59,130,246,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px"><i class="fas fa-globe" style="color:#3b82f6;font-size:18px"></i></div>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:6px">Global Connect</h4>
+                    <p style="font-size:11px;color:#777;line-height:1.5">Dual-degree with Top 100 university, 30% mobility rise</p>
+                </div>
+                <div style="text-align:center;padding:16px">
+                    <div style="width:48px;height:48px;border-radius:12px;background:rgba(234,179,8,.1);display:flex;align-items:center;justify-content:center;margin:0 auto 10px"><i class="fas fa-car-battery" style="color:#eab308;font-size:18px"></i></div>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:6px">EV Technology</h4>
+                    <p style="font-size:11px;color:#777;line-height:1.5">New program in EVs, BMS & Automotive Electronics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INDUSTRY PARTNERSHIPS -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Collaborations</div>
+            <h2 class="section-title">Industry <span class="highlight">Partnerships</span></h2>
+        </div>
+        <div class="grid-3" style="margin-bottom:32px">
+            <div class="card anim delay-1">
+                <div class="card-icon green"><i class="fas fa-bolt"></i></div>
+                <h3 style="font-size:17px;font-weight:700;margin-bottom:4px">PEDA</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:10px">Punjab Energy Development Agency</p>
+                <p style="font-size:13px;color:#888;line-height:1.6">Government of India partnership for energy research and sustainable development projects</p>
+            </div>
+            <div class="card anim delay-2">
+                <div class="card-icon red"><i class="fas fa-cog"></i></div>
+                <h3 style="font-size:17px;font-weight:700;margin-bottom:4px">Emmbross</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:10px">Auto Parts Manufacturer, Baddi</p>
+                <p style="font-size:13px;color:#888;line-height:1.6">Collaboration for auto parts research, manufacturing optimization and student internships</p>
+            </div>
+            <div class="card anim delay-3">
+                <div class="card-icon yellow"><i class="fas fa-industry"></i></div>
+                <h3 style="font-size:17px;font-weight:700;margin-bottom:4px">Amber Enterprises</h3>
+                <p style="font-size:11px;color:#777;margin-bottom:10px">Rajpura</p>
+                <p style="font-size:13px;color:#888;line-height:1.6">Strategic partnership for manufacturing excellence, training and live project collaboration</p>
+            </div>
+        </div>
+        <div class="card anim" style="border-color:rgba(220,38,38,.15)">
+            <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+                <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#dc2626,#991b1b)">JS</div>
+                <div style="flex:1;min-width:200px">
+                    <span style="padding:4px 10px;background:rgba(220,38,38,.1);color:#dc2626;font-size:11px;font-weight:700;border-radius:6px;display:inline-block;margin-bottom:8px">PROFESSOR OF PRACTICE</span>
+                    <h3 style="font-size:18px;font-weight:700">Dr. Jaspal Singh</h3>
+                    <p style="font-size:13px;color:#888;margin-top:4px">Professional Design Engineer & Safety Officer — Boilers, Pressure Vessels & Refrigeration</p>
+                    <p style="font-size:13px;color:#dc2626;margin-top:2px">Technical Safety-BC, Canada</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMMUNITY ENGAGEMENT -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Social Responsibility</div>
+            <h2 class="section-title">Community <span class="highlight">Engagement</span></h2>
+        </div>
+        <div class="grid-3">
+            <div class="img-card anim delay-1">
+                <img src="https://picsum.photos/seed/tree-plantation-cu/500/280.jpg" alt="Tree Plantation">
+                <div style="padding:20px">
+                    <div class="img-card-date" style="color:#22c55e">23.09.2025</div>
+                    <div class="img-card-title">Tree Plantation Drive</div>
+                    <div class="img-card-desc">Contributing to environmental sustainability through campus and community greening initiatives</div>
+                </div>
+            </div>
+            <div class="img-card anim delay-2">
+                <img src="https://picsum.photos/seed/career-counseling-mech/500/280.jpg" alt="Career Counseling">
+                <div style="padding:20px">
+                    <div class="img-card-date" style="color:#dc2626">18.02.2025</div>
+                    <div class="img-card-title">Career Counseling & Exposure</div>
+                    <div class="img-card-desc">ISR Activity exposing students to mechanical engineering career paths and opportunities</div>
+                </div>
+            </div>
+            <div class="img-card anim delay-3">
+                <img src="https://picsum.photos/seed/prabh-aasra-visit/500/280.jpg" alt="Prabh Aasra Visit">
+                <div style="padding:20px">
+                    <div class="img-card-date" style="color:#eab308">14.11.2024</div>
+                    <div class="img-card-title">Visit to Prabh Aasra</div>
+                    <div class="img-card-desc">Universal Disabled Caretaker Social Welfare Society — empathetic community engagement</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- INSTITUTION BUILDING -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Building CU</div>
+            <h2 class="section-title">Institution <span class="highlight">Building</span></h2>
+        </div>
+        <div class="grid-3" style="margin-bottom:32px">
+            <div class="card anim delay-1">
+                <i class="fas fa-chart-line" style="color:#dc2626;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Consistent Academic Results</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">Strong CGPA trends, high pass percentages, quality placements</p>
+            </div>
+            <div class="card anim delay-2">
+                <i class="fas fa-bullhorn" style="color:#eab308;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Enhanced CU Branding</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">ORM and Admissions Outreach Programs</p>
+            </div>
+            <div class="card anim delay-3">
+                <i class="fas fa-eye" style="color:#3b82f6;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">National Visibility</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">National competitions, research projects, innovation challenges</p>
+            </div>
+            <div class="card anim delay-4">
+                <i class="fas fa-lightbulb" style="color:#22c55e;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Culture of Innovation</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">Student-project showcases, patents, prototypes, tech demos</p>
+            </div>
+            <div class="card anim delay-5">
+                <i class="fas fa-calendar-alt" style="color:#a855f7;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">National-Level Events</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">IFDPs and expert sessions from multiple universities and industries</p>
+            </div>
+            <div class="card anim delay-6">
+                <i class="fas fa-file-signature" style="color:#ec4899;font-size:18px;margin-bottom:12px;display:block"></i>
+                <h4 style="font-size:14px;font-weight:700;margin-bottom:6px">Research Output Boost</h4>
+                <p style="font-size:12px;color:#888;line-height:1.6">Increased patents, publications strengthening CU's reputation</p>
+            </div>
+        </div>
+        <div class="card anim" style="border-color:rgba(220,38,38,.2);text-align:center;padding:32px">
+            <div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:rgba(220,38,38,.1);border-radius:50px;margin-bottom:14px">
+                <i class="fas fa-star" style="color:#eab308"></i>
+                <span style="font-size:13px;color:#dc2626;font-weight:700">Performer at Corporate Advisory Board 2025</span>
+            </div>
+            <h3 style="font-size:18px;font-weight:700">Recognized for Innovation Excellence</h3>
+            <p style="font-size:13px;color:#888;margin-top:8px">Academic and Non-Academic staff support for Admission, Branding, FAP, Registration, Campus Visit</p>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="contact">
+    <div class="section-inner" style="text-align:center">
+        <div class="anim">
+            <div class="hero-badge" style="margin-bottom:20px">
+                <div class="hero-badge-dot"></div>
+                <span>Admissions Open 2025</span>
+            </div>
+            <h2 class="section-title" style="margin-bottom:12px">Ready to Build the <span class="highlight">Future?</span></h2>
+            <p style="font-size:17px;color:#888;max-width:600px;margin:0 auto 36px;line-height:1.7">Join India's No.1 Private University and be part of a department that shapes innovators, researchers, and industry leaders.</p>
+            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px">
+                <a href="https://www.cuchd.in" target="_blank" class="btn-primary">Apply Now <i class="fas fa-external-link-alt"></i></a>
+                <a href="https://www.cuchd.in" target="_blank" class="btn-secondary">Visit www.cuchd.in</a>
+            </div>
+            <div class="grid-3" style="max-width:700px;margin:0 auto">
+                <div class="card" style="text-align:center;padding:20px">
+                    <i class="fas fa-map-marker-alt" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:4px">Campus Location</h4>
+                    <p style="font-size:11px;color:#777">Gharuan, Mohali, Punjab</p>
+                </div>
+                <div class="card" style="text-align:center;padding:20px">
+                    <i class="fas fa-globe" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:4px">Website</h4>
+                    <p style="font-size:11px;color:#777">www.cuchd.in</p>
+                </div>
+                <div class="card" style="text-align:center;padding:20px">
+                    <i class="fas fa-phone" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i>
+                    <h4 style="font-size:13px;font-weight:700;margin-bottom:4px">Helpline</h4>
+                    <p style="font-size:11px;color:#777">Visit Official Website</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#dc2626,#991b1b);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:12px;color:#fff">CU</div>
+            <span class="footer-text">Department of Mechanical Engineering, Chandigarh University</span>
+        </div>
+        <span class="footer-text">Presentation Data as of 01.12.2025</span>
+    </div>
+</footer>
+
+<script>
+// ===== COUNTER ANIMATION =====
+function animateCounters() {
+    document.querySelectorAll('.counter').forEach(function(el) {
+        if (el.dataset.done) return;
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) {
+            el.dataset.done = '1';
+            var target = parseInt(el.dataset.target);
+            var duration = 2000;
+            var start = performance.now();
+            function tick(now) {
+                var p = Math.min((now - start) / duration, 1);
+                var eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.floor(target * eased);
+                if (p < 1) requestAnimationFrame(tick);
+                else el.textContent = target;
+            }
+            requestAnimationFrame(tick);
+        }
+    });
+}
+
+// ===== PROGRESS BARS =====
+function animateBars() {
+    document.querySelectorAll('.progress-bar').forEach(function(bar) {
+        if (bar.dataset.done) return;
+        var rect = bar.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.9) {
+            bar.dataset.done = '1';
+            bar.style.width = bar.dataset.width;
+        }
+    });
+}
+
+// ===== SCROLL REVEAL =====
+function handleReveal() {
+    var els = document.querySelectorAll('.anim, .anim-left, .anim-right, .anim-scale');
+    els.forEach(function(el) {
+        if (el.classList.contains('visible')) return;
+        var rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.88) {
+            el.classList.add('visible');
+        }
+    });
+}
+
+// ===== NAVBAR SCROLL =====
+function handleNav() {
+    var nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+}
+
+// ===== MOBILE MENU =====
+var hamburger = document.getElementById('hamburgerBtn');
+var overlay = document.getElementById('mobileOverlay');
+var drawer = document.getElementById('mobileDrawer');
+var closeBtn = document.getElementById('mobileCloseBtn');
+
+function openMenu() { overlay.classList.add('open'); drawer.classList.add('open'); }
+function closeMenu() { overlay.classList.remove('open'); drawer.classList.remove('open'); }
+
+hamburger.addEventListener('click', openMenu);
+closeBtn.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
+document.querySelectorAll('.mob-link').forEach(function(a) {
+    a.addEventListener('click', closeMenu);
+});
+
+// ===== TABS =====
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+        var panel = document.getElementById('panel-' + btn.dataset.tab);
+        if (panel) panel.classList.add('active');
+    });
+});
+
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            var y = target.getBoundingClientRect().top + window.scrollY - 72;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    });
+});
+
+// ===== SCROLL LISTENER =====
+window.addEventListener('scroll', function() {
+    handleReveal();
+    animateCounters();
+    animateBars();
+    handleNav();
+}, { passive: true });
+
+// ===== INITIAL =====
+handleReveal();
+animateCounters();
+animateBars();
+</script>
+
+</body>
+</html>

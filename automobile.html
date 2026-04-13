@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Department of Automobile Engineering | Chandigarh University</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Poppins',sans-serif;background:#ffffff;color:#1a1a2e;overflow-x:hidden}
+        ::-webkit-scrollbar{width:6px}
+        ::-webkit-scrollbar-track{background:#f5f5f5}
+        ::-webkit-scrollbar-thumb{background:#dc2626;border-radius:3px}
+
+        /* NAVBAR */
+        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:18px 0;transition:all .35s ease;background:rgba(255,255,255,.8);backdrop-filter:blur(12px)}
+        .navbar.scrolled{padding:12px 0;background:rgba(255,255,255,.96);box-shadow:0 1px 20px rgba(0,0,0,.06)}
+        .nav-inner{max-width:1200px;margin:auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+        .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+        .nav-logo-icon{width:44px;height:44px;background:linear-gradient(135deg,#dc2626,#b91c1c);border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:#fff;box-shadow:0 4px 15px rgba(220,38,38,.3)}
+        .nav-logo-text{font-weight:700;font-size:15px;color:#1a1a2e;line-height:1.2}
+        .nav-logo-sub{font-size:10px;color:#888;letter-spacing:1.5px;text-transform:uppercase;font-weight:500}
+        .nav-links{display:flex;align-items:center;gap:2px}
+        .nav-links a{padding:8px 14px;font-size:13px;color:#555;text-decoration:none;border-radius:8px;transition:all .3s;font-weight:500}
+        .nav-links a:hover{color:#dc2626;background:rgba(220,38,38,.05)}
+        .nav-cta{padding:10px 26px!important;background:linear-gradient(135deg,#dc2626,#b91c1c)!important;color:#fff!important;border-radius:10px!important;font-weight:600!important;box-shadow:0 4px 15px rgba(220,38,38,.25);transition:all .3s!important}
+        .nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(220,38,38,.35)!important;color:#fff!important}
+        .hamburger{display:none;background:none;border:none;color:#1a1a2e;font-size:22px;cursor:pointer}
+
+        /* HERO */
+        .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:120px 24px 80px;background:linear-gradient(160deg,#fff 0%,#fef2f2 40%,#fff 100%)}
+        .hero-pattern{position:absolute;inset:0;background-image:radial-gradient(rgba(220,38,38,.04) 1px,transparent 1px);background-size:24px 24px}
+        .hero-blob{position:absolute;width:500px;height:500px;border-radius:50%;filter:blur(80px);opacity:.15}
+        .hero-blob-1{background:#dc2626;top:-100px;right:-100px}
+        .hero-blob-2{background:#ef4444;bottom:-150px;left:-100px;opacity:.08}
+        .hero-inner{max-width:1200px;margin:auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+        .hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 20px;background:#fff;border:1px solid rgba(220,38,38,.15);border-radius:50px;margin-bottom:24px;box-shadow:0 2px 10px rgba(220,38,38,.06)}
+        .hero-badge-dot{width:8px;height:8px;background:#dc2626;border-radius:50%;animation:pulse 2s infinite}
+        .hero-badge span{font-size:12px;color:#dc2626;font-weight:600;letter-spacing:.8px;text-transform:uppercase}
+        .hero h1{font-size:clamp(36px,5vw,62px);font-weight:900;line-height:1.08;margin-bottom:18px;color:#1a1a2e}
+        .hero h1 .highlight{color:#dc2626;position:relative}
+        .hero h1 .highlight::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:6px;background:rgba(220,38,38,.15);border-radius:3px}
+        .hero-desc{font-size:17px;color:#666;line-height:1.75;margin-bottom:32px;max-width:480px}
+        .hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+        .btn-primary{padding:15px 36px;background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;display:inline-flex;align-items:center;gap:10px;font-family:'Poppins',sans-serif;box-shadow:0 6px 25px rgba(220,38,38,.3)}
+        .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(220,38,38,.4)}
+        .btn-secondary{padding:15px 36px;background:#fff;color:#1a1a2e;border:2px solid #e5e7eb;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'Poppins',sans-serif}
+        .btn-secondary:hover{border-color:#dc2626;color:#dc2626;background:rgba(220,38,38,.02)}
+        .hero-stats{display:flex;gap:32px}
+        .hero-stat-num{font-size:34px;font-weight:900;color:#1a1a2e}
+        .hero-stat-num em{color:#dc2626;font-style:normal}
+        .hero-stat-label{font-size:12px;color:#999;margin-top:2px;font-weight:500}
+        .hero-stat-divider{width:1px;background:#e5e7eb}
+        .hero-visual{position:relative;display:flex;justify-content:center}
+        .hero-image-wrapper{width:100%;max-width:460px;aspect-ratio:1;border-radius:28px;overflow:hidden;position:relative;background:#f8f8f8;box-shadow:0 30px 80px rgba(220,38,38,.12);border:2px solid rgba(220,38,38,.08)}
+        .hero-image-wrapper img{width:100%;height:100%;object-fit:cover;opacity:.35}
+        .hero-image-overlay{position:absolute;inset:0;background:linear-gradient(to top,#fff 0%,transparent 50%)}
+        .hero-image-info{position:absolute;bottom:28px;left:28px;right:28px}
+        .hero-image-info .label{font-size:10px;color:#dc2626;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:4px;font-weight:700}
+        .hero-image-info .title{font-size:20px;font-weight:800;color:#1a1a2e}
+        .hero-image-info .sub{font-size:13px;color:#888}
+        .float-badge{position:absolute;padding:14px 18px;background:#fff;border:1px solid #eee;border-radius:14px;box-shadow:0 10px 40px rgba(0,0,0,.08);animation:floatBadge 3s ease-in-out infinite}
+        .float-badge-1{top:20px;right:-10px}
+        .float-badge-2{bottom:100px;left:-20px;animation-delay:.8s}
+        .float-badge-3{top:50%;right:-30px;animation-delay:1.5s}
+        .float-badge .fb-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;margin-bottom:6px}
+        .float-badge .fb-label{font-size:10px;color:#999;font-weight:500}
+        .float-badge .fb-value{font-size:14px;font-weight:800;color:#1a1a2e}
+        @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(220,38,38,.4)}50%{opacity:.7;box-shadow:0 0 0 8px rgba(220,38,38,0)}}
+        @keyframes floatBadge{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+        /* MARQUEE */
+        .marquee-wrap{overflow:hidden;border-top:1px solid #f0f0f0;border-bottom:1px solid #f0f0f0;padding:16px 0;background:#fafafa}
+        .marquee-track{display:flex;animation:marquee 28s linear infinite;width:max-content}
+        .marquee-track span{padding:0 30px;font-size:13px;font-weight:700;color:#ccc;white-space:nowrap;letter-spacing:.5px}
+        .marquee-track .dot{color:#fca5a5;padding:0 6px}
+        @keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        /* SECTIONS */
+        .section{padding:100px 24px;position:relative}
+        .section-gray{background:#fafafa}
+        .section-inner{max-width:1200px;margin:auto}
+        .section-header{text-align:center;margin-bottom:56px}
+        .section-tag{display:inline-flex;align-items:center;gap:6px;padding:6px 18px;background:#fef2f2;border:1px solid #fecaca;border-radius:50px;margin-bottom:14px;font-size:11px;color:#dc2626;font-weight:600;letter-spacing:1.5px;text-transform:uppercase}
+        .section-title{font-size:clamp(28px,4vw,46px);font-weight:900;line-height:1.15;margin-bottom:10px;color:#1a1a2e}
+        .section-title .highlight{color:#dc2626}
+        .section-desc{font-size:16px;color:#888;max-width:580px;margin:auto;line-height:1.7}
+
+        /* CARDS */
+        .card{background:#fff;border:1px solid #f0f0f0;border-radius:18px;padding:28px;transition:all .4s ease;position:relative}
+        .card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.06);border-color:rgba(220,38,38,.15)}
+        .card-icon{width:50px;height:50px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+        .ci-red{background:#fef2f2;color:#dc2626}
+        .ci-green{background:#f0fdf4;color:#16a34a}
+        .ci-blue{background:#eff6ff;color:#2563eb}
+        .ci-yellow{background:#fefce8;color:#ca8a04}
+        .ci-purple{background:#faf5ff;color:#9333ea}
+        .ci-pink{background:#fdf2f8;color:#db2777}
+        .card-num{font-size:38px;font-weight:900;color:#1a1a2e;margin-bottom:2px}
+        .card-num em{color:#dc2626;font-style:normal}
+        .card-label{font-size:13px;color:#888;margin-bottom:14px;font-weight:500}
+        .card-tags{display:flex;flex-wrap:wrap;gap:6px}
+        .ct-red{padding:4px 10px;font-size:11px;background:#fef2f2;color:#dc2626;border-radius:6px;font-weight:600}
+        .ct-green{padding:4px 10px;font-size:11px;background:#f0fdf4;color:#16a34a;border-radius:6px;font-weight:600}
+        .ct-blue{padding:4px 10px;font-size:11px;background:#eff6ff;color:#2563eb;border-radius:6px;font-weight:600}
+        .ct-yellow{padding:4px 10px;font-size:11px;background:#fefce8;color:#ca8a04;border-radius:6px;font-weight:600}
+
+        /* GRIDS */
+        .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+        .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+        .g2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+
+        /* TIMELINE */
+        .timeline{position:relative;padding-left:42px}
+        .timeline-line{position:absolute;left:16px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,#fecaca,#dc2626,#fecaca,transparent)}
+        .timeline-item{position:relative;margin-bottom:18px}
+        .timeline-dot{position:absolute;left:-34px;top:10px;width:10px;height:10px;background:#dc2626;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 3px #fecaca}
+        .timeline-card{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:16px 20px;transition:all .3s}
+        .timeline-card:hover{border-color:#fecaca;box-shadow:0 4px 20px rgba(220,38,38,.06)}
+        .timeline-year{font-size:13px;font-weight:800;color:#dc2626;margin-bottom:3px}
+        .timeline-text{font-size:13px;color:#555;line-height:1.5}
+
+        /* TABS */
+        .tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:32px}
+        .tab-btn{padding:10px 24px;font-size:13px;font-weight:600;border:2px solid #f0f0f0;border-radius:10px;background:#fff;color:#888;cursor:pointer;transition:all .3s;font-family:'Poppins',sans-serif}
+        .tab-btn.active{background:linear-gradient(135deg,#dc2626,#b91c1c);color:#fff;border-color:transparent;box-shadow:0 4px 15px rgba(220,38,38,.25)}
+        .tab-btn:hover:not(.active){color:#dc2626;border-color:#fecaca}
+        .tab-panel{display:none;animation:fadeUp .45s ease}
+        .tab-panel.active{display:block}
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+        /* BADGE BOX */
+        .badge-box{background:#fff;border:2px solid #fecaca;border-radius:18px;padding:32px;text-align:center;transition:all .3s}
+        .badge-box:hover{border-color:#dc2626;box-shadow:0 8px 30px rgba(220,38,38,.08)}
+        .badge-box .big{font-size:52px;font-weight:900;color:#dc2626}
+        .badge-box .small{font-size:13px;color:#888;margin-top:4px;font-weight:500}
+
+        /* AVATAR */
+        .avatar{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;flex-shrink:0}
+        .avatar-lg{width:80px;height:80px;font-size:28px}
+
+        /* CHECK LIST */
+        .check-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+        .check-list li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#666;line-height:1.5}
+        .check-list li i{color:#16a34a;margin-top:3px;font-size:12px;flex-shrink:0}
+
+        /* PILLS */
+        .pill-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+        .pill{padding:10px 18px;background:#fff;border:1px solid #f0f0f0;border-radius:12px;font-size:13px;color:#555;transition:all .3s;display:flex;align-items:center;gap:8px;font-weight:500}
+        .pill:hover{border-color:#fecaca;background:#fef2f2;color:#dc2626}
+
+        /* IMG CARD */
+        .img-card{border-radius:18px;overflow:hidden;background:#fff;border:1px solid #f0f0f0;transition:all .4s}
+        .img-card:hover{transform:translateY(-4px);box-shadow:0 16px 50px rgba(0,0,0,.07)}
+        .img-card img{width:100%;height:200px;object-fit:cover;display:block}
+        .img-card-body{padding:24px}
+        .img-card-label{font-size:11px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+        .img-card-title{font-size:17px;font-weight:700;color:#1a1a2e;margin-bottom:4px}
+        .img-card-date{font-size:12px;color:#999;margin-bottom:8px;font-weight:500}
+        .img-card-desc{font-size:13px;color:#777;line-height:1.6}
+
+        /* RECRUITER */
+        .recruiter-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+        .recruiter-item{background:#fff;border:1px solid #f0f0f0;border-radius:12px;padding:16px 12px;text-align:center;transition:all .3s}
+        .recruiter-item:hover{border-color:#fecaca;transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.04)}
+        .recruiter-item .name{font-size:13px;font-weight:700;color:#1a1a2e}
+        .recruiter-item .type{font-size:10px;color:#aaa;margin-top:2px}
+
+        /* FEATURE ROW */
+        .feature-row{display:flex;align-items:flex-start;gap:16px;padding:18px;background:#fff;border:1px solid #f0f0f0;border-radius:14px;transition:all .3s}
+        .feature-row:hover{border-color:#fecaca;box-shadow:0 4px 20px rgba(220,38,38,.05)}
+        .feature-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+        .feature-title{font-size:14px;font-weight:700;color:#1a1a2e;margin-bottom:2px}
+        .feature-desc{font-size:12px;color:#888;line-height:1.6}
+
+        /* PLACEMENT STAT CARD */
+        .stat-card{text-align:center;padding:28px;border-radius:18px;border:2px solid;position:relative;overflow:hidden}
+        .stat-card::before{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;opacity:.06}
+        .stat-card-red{border-color:#fecaca;background:linear-gradient(135deg,#fff,#fef2f2)}
+        .stat-card-red::before{background:#dc2626}
+        .stat-card-yellow{border-color:#fef08a;background:linear-gradient(135deg,#fff,#fefce8)}
+        .stat-card-yellow::before{background:#ca8a04}
+        .stat-card-green{border-color:#bbf7d0;background:linear-gradient(135deg,#fff,#f0fdf4)}
+        .stat-card-green::before{background:#16a34a}
+        .stat-card-blue{border-color:#bfdbfe;background:linear-gradient(135deg,#fff,#eff6ff)}
+        .stat-card-blue::before{background:#2563eb}
+        .stat-card .sc-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:700;margin-bottom:6px}
+        .stat-card .sc-num{font-size:38px;font-weight:900;color:#1a1a2e}
+        .stat-card .sc-sub{font-size:12px;color:#888;margin-top:4px;font-weight:500}
+
+        /* CTA */
+        .cta-section{background:linear-gradient(160deg,#1a1a2e 0%,#2d1b3d 50%,#1a1a2e 100%);color:#fff;position:relative;overflow:hidden}
+        .cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(220,38,38,.1) 0%,transparent 70%)}
+
+        /* FOOTER */
+        .footer{border-top:1px solid #f0f0f0;padding:32px 24px;background:#fafafa}
+        .footer-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+        .footer-left{display:flex;align-items:center;gap:12px}
+        .footer-text{font-size:12px;color:#bbb;font-weight:500}
+
+        /* MOBILE */
+        .mobile-overlay{position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:999;opacity:0;pointer-events:none;transition:opacity .3s}
+        .mobile-overlay.open{opacity:1;pointer-events:all}
+        .mobile-drawer{position:fixed;top:0;right:0;width:280px;height:100%;background:#fff;border-left:1px solid #f0f0f0;z-index:1000;transform:translateX(100%);transition:transform .3s;padding:24px}
+        .mobile-drawer.open{transform:translateX(0)}
+        .mobile-close{position:absolute;top:16px;right:16px;background:none;border:none;color:#1a1a2e;font-size:20px;cursor:pointer}
+        .mobile-links{margin-top:60px;display:flex;flex-direction:column;gap:2px}
+        .mobile-links a{padding:12px 16px;font-size:14px;color:#555;text-decoration:none;border-radius:10px;transition:all .3s;font-weight:500}
+        .mobile-links a:hover{color:#dc2626;background:#fef2f2}
+
+        /* ANIMATIONS */
+        .anim{opacity:0;transform:translateY(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+        .anim.visible{opacity:1;transform:translateY(0)}
+        .anim-left{opacity:0;transform:translateX(-30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+        .anim-left.visible{opacity:1;transform:translateX(0)}
+        .anim-right{opacity:0;transform:translateX(30px);transition:all .6s cubic-bezier(.4,0,.2,1)}
+        .anim-right.visible{opacity:1;transform:translateX(0)}
+        .d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
+        .d4{transition-delay:.32s}.d5{transition-delay:.4s}.d6{transition-delay:.48s}
+
+        /* RESPONSIVE */
+        @media(max-width:1024px){
+            .g4{grid-template-columns:repeat(2,1fr)}
+            .g3{grid-template-columns:repeat(2,1fr)}
+            .hero-inner{grid-template-columns:1fr;text-align:center}
+            .hero-desc{margin:0 auto 32px}
+            .hero-btns{justify-content:center}
+            .hero-stats{justify-content:center}
+            .hero-visual{display:none}
+            .nav-links{display:none}
+            .hamburger{display:block}
+            .recruiter-grid{grid-template-columns:repeat(3,1fr)}
+        }
+        @media(max-width:640px){
+            .g4,.g3,.g2{grid-template-columns:1fr}
+            .hero-stats{flex-direction:column;gap:16px;align-items:center}
+            .hero-stat-divider{width:60px;height:1px}
+            .recruiter-grid{grid-template-columns:repeat(2,1fr)}
+            .section{padding:64px 16px}
+            .section-header{margin-bottom:36px}
+        }
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">CU</div>
+            <div>
+                <div class="nav-logo-text">Automobile Engineering</div>
+                <div class="nav-logo-sub">Chandigarh University</div>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="#highlights">Highlights</a>
+            <a href="#rankings">Rankings</a>
+            <a href="#usps">USPs</a>
+            <a href="#labs">Infrastructure</a>
+            <a href="#faculty">Faculty</a>
+            <a href="#placements">Placements</a>
+            <a href="#research">Research</a>
+            <a href="/autologin.html" class="nav-cta">LOGIN</a>
+        </div>
+        <button class="hamburger" id="hamburgerBtn" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-overlay" id="mobileOverlay"></div>
+<div class="mobile-drawer" id="mobileDrawer">
+    <button class="mobile-close" id="mobileCloseBtn" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    <div class="mobile-links">
+        <a href="#highlights" class="mob-link">Highlights</a>
+        <a href="#rankings" class="mob-link">Rankings</a>
+        <a href="#usps" class="mob-link">USPs</a>
+        <a href="#labs" class="mob-link">Infrastructure</a>
+        <a href="#faculty" class="mob-link">Faculty</a>
+        <a href="#placements" class="mob-link">Placements</a>
+        <a href="#research" class="mob-link">Research</a>
+        <a href="#login" class="mob-link" style="color:#dc2626;font-weight:700">Login</a>
+        <a href="#contact" class="mob-link" style="color:#dc2626;font-weight:700">Visit Campus</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+    <div class="hero-inner">
+        <div>
+            <div class="hero-badge anim">
+                <div class="hero-badge-dot"></div>
+                <span>Established 2013 | 12+ Years of Excellence</span>
+            </div>
+            <h1 class="anim d1">Department of<br><span class="highlight">Automobile</span><br>Engineering</h1>
+            <p class="hero-desc anim d2">Design, Test, and Develop vehicles and/or components from concept through to production. Ideal for a career in the automobile industry with comprehensive skill development.</p>
+            <div class="hero-btns anim d3">
+                <a href="#highlights" class="btn-primary">Explore Department <i class="fas fa-arrow-right"></i></a>
+                
+                <!-- LOGIN BUTTON ADDED -->
+                <a href="#login" class="btn-secondary">Login <i class="fas fa-sign-in-alt"></i></a>
+                
+                <a href="#placements" class="btn-secondary">View Placements</a>
+            </div>
+            <div class="hero-stats anim d4">
+                <div>
+                    <div class="hero-stat-num"><em class="counter" data-target="6">0</em></div>
+                    <div class="hero-stat-label">Industry Labs</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div>
+                    <div class="hero-stat-num"><em class="counter" data-target="200">0</em>+</div>
+                    <div class="hero-stat-label">Publications</div>
+                </div>
+                <div class="hero-stat-divider"></div>
+                <div>
+                    <div class="hero-stat-num"><em class="counter" data-target="40">0</em></div>
+                    <div class="hero-stat-label">Patents Filed</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual anim-right d2">
+            <div class="hero-image-wrapper">
+                <!-- Placeholder for Automobile Image -->
+                <img src="/images/automobile_lab_hero.jpg" alt="Automobile Lab">
+                <div class="hero-image-overlay"></div>
+                <div class="hero-image-info">
+                    <div class="label">NAAC A+ Accredited</div>
+                    <div class="title">University Institute of Engineering</div>
+                    <div class="sub">Chandigarh University</div>
+                </div>
+            </div>
+            <div class="float-badge float-badge-1">
+                <div class="fb-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-car"></i></div>
+                <div class="fb-label">Formula 1</div>
+                <div class="fb-value">SAE Student</div>
+            </div>
+            <div class="float-badge float-badge-2">
+                <div class="fb-icon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-cogs"></i></div>
+                <div class="fb-label">Training</div>
+                <div class="fb-value">Industry Ready</div>
+            </div>
+            <div class="float-badge float-badge-3">
+                <div class="fb-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-trophy"></i></div>
+                <div class="fb-label">Go-Karting</div>
+                <div class="fb-value">Team Hornet</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <span>MAHINDRA</span><span class="dot">&#9679;</span><span>HONDA</span><span class="dot">&#9679;</span><span>HYUNDAI</span><span class="dot">&#9679;</span><span>MG MOTORS</span><span class="dot">&#9679;</span><span>VOLVO-EICHER</span><span class="dot">&#9679;</span><span>HERO MOTO CORP</span><span class="dot">&#9679;</span><span>TATA</span><span class="dot">&#9679;</span><span>ICICI LOMBARD</span><span class="dot">&#9679;</span><span>COST MASTERS</span><span class="dot">&#9679;</span><span>ADROITEC</span><span class="dot">&#9679;</span>
+        <span>MAHINDRA</span><span class="dot">&#9679;</span><span>HONDA</span><span class="dot">&#9679;</span><span>HYUNDAI</span><span class="dot">&#9679;</span><span>MG MOTORS</span><span class="dot">&#9679;</span><span>VOLVO-EICHER</span><span class="dot">&#9679;</span><span>HERO MOTO CORP</span><span class="dot">&#9679;</span><span>TATA</span><span class="dot">&#9679;</span><span>ICICI LOMBARD</span><span class="dot">&#9679;</span><span>COST MASTERS</span><span class="dot">&#9679;</span><span>ADROITEC</span><span class="dot">&#9679;</span>
+    </div>
+</div>
+
+<!-- KEY HIGHLIGHTS -->
+<section class="section" id="highlights">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">At a Glance</div>
+            <h2 class="section-title">Department <span class="highlight">Highlights</span></h2>
+            <p class="section-desc">Creating future-ready automobile engineers with industry-aligned curriculum and state-of-the-art labs.</p>
+        </div>
+        <div class="g4">
+            <div class="card anim d1">
+                <div class="card-icon ci-red"><i class="fas fa-flask"></i></div>
+                <div class="card-num"><em class="counter" data-target="6">0</em></div>
+                <div class="card-label">Industry Collaborated Labs</div>
+                <div style="margin-top:14px">
+                    <div style="height:6px;background:#fef2f2;border-radius:10px;overflow:hidden">
+                        <div class="progress-bar" style="width:0;height:100%;background:linear-gradient(90deg,#dc2626,#ef4444);border-radius:10px;transition:width 1.5s ease" data-width="95%"></div>
+                    </div>
+                    <div style="font-size:11px;color:#bbb;margin-top:6px;font-weight:500">Mahindra, Honda, MG, Eicher</div>
+                </div>
+            </div>
+            <div class="card anim d2">
+                <div class="card-icon ci-green"><i class="fas fa-book-open"></i></div>
+                <div class="card-num"><em class="counter" data-target="200">0</em>+</div>
+                <div class="card-label">Research Publications</div>
+                <div class="card-tags"><span class="ct-green">Journals</span><span class="ct-blue">Conferences</span></div>
+            </div>
+            <div class="card anim d3">
+                <div class="card-icon ci-yellow"><i class="fas fa-file-patent"></i></div>
+                <div class="card-num"><em class="counter" data-target="40">0</em></div>
+                <div class="card-label">Patents Filed</div>
+                <div style="font-size:12px;color:#bbb;margin-top:10px;font-weight:500">By Students & Faculty</div>
+            </div>
+            <div class="card anim d4">
+                <div class="card-icon ci-purple"><i class="fas fa-user-graduate"></i></div>
+                <div class="card-num"><em class="counter" data-target="50">0</em>+</div>
+                <div class="card-label">M.E. Awarded</div>
+                <div class="card-tags"><span class="ct-red">Research</span><span class="ct-yellow">PhD Pursuing</span></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RANKINGS -->
+<section class="section section-gray" id="rankings">
+    <div class="section-inner">
+        <div class="g2" style="gap:60px;align-items:start">
+            <div class="anim-left">
+                <div class="section-tag">Global Recognition</div>
+                <h2 class="section-title" style="text-align:left;margin-bottom:16px">Accreditations & <span class="highlight">Milestones</span></h2>
+                <p style="font-size:16px;color:#888;line-height:1.7;margin-bottom:32px">Chandigarh University is NAAC A+ Accredited, ensuring high-quality education and global standards in Automobile Engineering.</p>
+                <div class="g3">
+                    <div style="background:#fff;border:1px solid #f0f0f0;border-radius:16px;padding:22px;text-align:center">
+                        <div style="font-size:32px;font-weight:900;color:#dc2626">A+</div>
+                        <div style="font-size:11px;color:#999;margin-top:4px;font-weight:500">NAAC Grade</div>
+                    </div>
+                    <div style="background:#fff;border:1px solid #f0f0f0;border-radius:16px;padding:22px;text-align:center">
+                        <div style="font-size:32px;font-weight:900;color:#dc2626">NBA</div>
+                        <div style="font-size:11px;color:#999;margin-top:4px;font-weight:500">Accredited</div>
+                    </div>
+                    <div style="background:#fff;border:1px solid #f0f0f0;border-radius:16px;padding:22px;text-align:center">
+                        <div style="font-size:32px;font-weight:900;color:#dc2626">12+</div>
+                        <div style="font-size:11px;color:#999;margin-top:4px;font-weight:500">Years Legacy</div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline anim-right">
+                <div class="timeline-line"></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2014</div><div class="timeline-text">Mahindra & Mahindra Training School Established</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2018</div><div class="timeline-text">Honda Automotive Research & Skill Development Centre</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2019</div><div class="timeline-text">Hyundai Professional Excellence Centre Launched</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2022</div><div class="timeline-text">MG Motors Lab (Connected, Autonomous, EV)</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2024</div><div class="timeline-text">Eicher-CU Centre of Excellence Established</div></div></div>
+                <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-card"><div class="timeline-year">2025</div><div class="timeline-text">VECV Regional Competence Development Centre</div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- USPs -->
+<section class="section" id="usps">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Why Choose Us</div>
+            <h2 class="section-title">Program <span class="highlight">USPs</span></h2>
+        </div>
+        <div class="g3">
+            <div class="card anim d1"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#fef2f2;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#dc2626">01</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">Experienced Faculty</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">Faculty from top institutes like IITs & NITs with an average experience of 10+ years.</p><div class="card-tags"><span class="ct-red">IITs</span><span class="ct-red">NITs</span><span class="ct-red">Industry Experts</span></div></div>
+            <div class="card anim d2"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#16a34a">02</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">Industry Collaborated Labs</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">6 specialized labs with Mahindra, Honda, Hyundai, MG Motors, and Volvo-Eicher.</p><div class="card-tags"><span class="ct-green">Mahindra</span><span class="ct-green">Honda</span><span class="ct-green">MG</span></div></div>
+            <div class="card anim d3"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#fefce8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#ca8a04">03</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">NEP Aligned Curriculum</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">Skilled-based competitive course curriculum mapped with best National and International Universities.</p><div class="card-tags"><span class="ct-yellow">NEP 2020</span><span class="ct-yellow">Skill Based</span></div></div>
+            <div class="card anim d4"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#faf5ff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#9333ea">04</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">Real World Experience</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">Labs for Auto CAD, Automotive Electronics, and Vehicle Maintenance & Diagnostics Center.</p><div class="card-tags"><span class="ct-red">Auto CAD</span><span class="ct-red">Diagnostics</span></div></div>
+            <div class="card anim d5"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#eff6ff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#2563eb">05</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">Futuristic Specializations</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">EV & Hybrid Vehicles, Automation, Intelligent Systems, and Advanced Fuels incorporated in curriculum.</p><div class="card-tags"><span class="ct-blue">EV Tech</span><span class="ct-blue">Automation</span></div></div>
+            <div class="card anim d6"><div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div style="width:36px;height:36px;border-radius:8px;background:#fdf2f8;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;color:#db2777">06</div><h3 style="font-size:16px;font-weight:700;color:#1a1a2e">Global Internships</h3></div><p style="font-size:13px;color:#777;line-height:1.7;margin-bottom:14px">Global industry internship programs under MG Nurture and Volvo Eicher Competence Development.</p><div class="card-tags"><span class="ct-red">MG Nurture</span><span class="ct-red">Volvo Eicher</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CENTERS OF EXCELLENCE -->
+<section class="section section-gray">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Industry Integration</div>
+            <h2 class="section-title">Centers of <span class="highlight">Excellence</span></h2>
+        </div>
+        <div class="g2" style="gap:24px;margin-bottom:32px">
+            <div class="img-card anim-left">
+                <img src="/images/honda_lab_auto.jpg" alt="Honda CoE">
+                <div class="img-card-body">
+                    <div class="img-card-label">Honda CoE</div>
+                    <div class="img-card-title">Honda Automotive Research & Skill Development Centre</div>
+                    <ul class="check-list" style="margin-top:12px">
+                        <li><i class="fas fa-check-circle"></i>Live Workshops from Industry Experts</li>
+                        <li><i class="fas fa-check-circle"></i>Hands-on Practice for Students</li>
+                        <li><i class="fas fa-check-circle"></i>Research on Blended Fuel Efficiency</li>
+                        <li><i class="fas fa-check-circle"></i>Two Wheeler Servicing & Diagnostics</li>
+                        <li><i class="fas fa-check-circle"></i>Engine Emissions Control</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="img-card anim-right">
+                <img src="/images/mahindra_lab_auto.jpg" alt="Mahindra CoE">
+                <div class="img-card-body">
+                    <div class="img-card-label" style="color:#ca8a04">Mahindra CoE</div>
+                    <div class="img-card-title">Mahindra & Mahindra Training School</div>
+                    <ul class="check-list" style="margin-top:12px">
+                        <li><i class="fas fa-check-circle"></i>Live Workshops from Industry Experts</li>
+                        <li><i class="fas fa-check-circle"></i>Hands-on Practice for Students</li>
+                        <li><i class="fas fa-check-circle"></i>Research on Latest I.C. Engine Tech</li>
+                        <li><i class="fas fa-check-circle"></i>Engine Scanning using OBD</li>
+                        <li><i class="fas fa-check-circle"></i>Research on Engine ECU and Sensors</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="g3">
+            <div class="card anim d1" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#fef2f2;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-car-side" style="font-size:22px;color:#dc2626"></i></div><h4 style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px">MG Motors Lab</h4><p style="font-size:11px;color:#999">Connected, Autonomous & EV</p></div>
+            <div class="card anim d2" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#eff6ff;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-truck" style="font-size:22px;color:#2563eb"></i></div><h4 style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px">Volvo-Eicher CoE</h4><p style="font-size:11px;color:#999">Heavy Diesel & BS-VI</p></div>
+            <div class="card anim d3" style="text-align:center"><div style="width:52px;height:52px;border-radius:14px;background:#f0fdf4;display:flex;align-items:center;justify-content:center;margin:0 auto 12px"><i class="fas fa-tools" style="font-size:22px;color:#16a34a"></i></div><h4 style="font-size:15px;font-weight:700;color:#1a1a2e;margin-bottom:4px">VECV RCDC</h4><p style="font-size:11px;color:#999">Regional Competence Dev. Centre</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- LABS -->
+<section class="section" id="labs">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">State of the Art</div>
+            <h2 class="section-title">Labs & <span class="highlight">Infrastructure</span></h2>
+        </div>
+        <div class="tabs anim">
+            <button class="tab-btn active" data-tab="auto">Automotive Electronics</button>
+            <button class="tab-btn" data-tab="central">Central Research</button>
+            <button class="tab-btn" data-tab="vehicle">Vehicle Diagnostics</button>
+            <button class="tab-btn" data-tab="cad">Auto CAD & Design</button>
+        </div>
+        <div class="tab-panel active" id="panel-auto">
+            <div class="g2" style="gap:32px;align-items:center">
+                <div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9"><img src="/images/auto_electronics_lab.jpg" alt="Automotive Electronics" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+                <div><h3 style="font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:12px">Automotive Electronics Lab</h3><p style="font-size:14px;color:#777;line-height:1.7;margin-bottom:20px">Equipped with modern vehicle electronics systems to understand ECU, sensors, and advanced vehicle communication protocols.</p><div class="g2" style="gap:10px"><div style="display:flex;align-items:center;gap:10px;padding:12px;background:#fafafa;border:1px solid #f0f0f0;border-radius:10px"><i class="fas fa-microchip" style="color:#dc2626"></i><span style="font-size:13px;color:#555;font-weight:500">ECU Tuning</span></div><div style="display:flex;align-items:center;gap:10px;padding:12px;background:#fafafa;border:1px solid #f0f0f0;border-radius:10px"><i class="fas fa-wifi" style="color:#dc2626"></i><span style="font-size:13px;color:#555;font-weight:500">CAN Bus</span></div></div></div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-central">
+            <div class="g2" style="gap:32px;align-items:center">
+                <div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9"><img src="/images/central_research_auto.jpg" alt="Central Research" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+                <div><h3 style="font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:12px">Central Research Facilities</h3><p style="font-size:14px;color:#777;line-height:1.7;margin-bottom:20px">Advanced characterization and testing facilities for material and engine research.</p><div style="display:flex;flex-direction:column;gap:12px"><div style="padding:16px;background:#fafafa;border:1px solid #f0f0f0;border-radius:12px"><h4 style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px">XRD & SEM</h4><p style="font-size:12px;color:#888;line-height:1.6">Material analysis and characterization.</p></div><div style="padding:16px;background:#fafafa;border:1px solid #f0f0f0;border-radius:12px"><h4 style="font-size:14px;font-weight:700;color:#dc2626;margin-bottom:4px">VCR Engine & FMS</h4><p style="font-size:12px;color:#888;line-height:1.6">Variable Compression Ratio & Flexible Manufacturing Systems.</p></div></div></div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-vehicle">
+            <div class="g2" style="gap:32px;align-items:center">
+                <div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9"><img src="/images/vehicle_diagnostics.jpg" alt="Vehicle Diagnostics" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+                <div><h3 style="font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:12px">Vehicle Maintenance & Diagnostics Center</h3><p style="font-size:14px;color:#777;line-height:1.7;margin-bottom:20px">Real-world experience of automobile engineer through hands-on vehicle maintenance and advanced diagnostics.</p><div class="g2" style="gap:10px"><div style="display:flex;align-items:center;gap:10px;padding:12px;background:#fafafa;border:1px solid #f0f0f0;border-radius:10px"><i class="fas fa-stethoscope" style="color:#dc2626"></i><span style="font-size:13px;color:#555;font-weight:500">OBD Scanning</span></div><div style="display:flex;align-items:center;gap:10px;padding:12px;background:#fafafa;border:1px solid #f0f0f0;border-radius:10px"><i class="fas fa-wrench" style="color:#dc2626"></i><span style="font-size:13px;color:#555;font-weight:500">Maintenance</span></div></div></div>
+            </div>
+        </div>
+        <div class="tab-panel" id="panel-cad">
+            <div class="g2" style="gap:32px;align-items:center">
+                <div style="border-radius:18px;overflow:hidden;aspect-ratio:16/9"><img src="/images/autocad_lab.jpg" alt="Auto CAD" style="width:100%;height:100%;object-fit:cover;display:block"></div>
+                <div><h3 style="font-size:22px;font-weight:800;color:#1a1a2e;margin-bottom:12px">Auto CAD & Design Lab</h3><p style="font-size:14px;color:#777;line-height:1.7;margin-bottom:20px">Specialized software for vehicle design, simulation, and drafting to prepare students for design engineering roles.</p><div style="display:flex;flex-wrap:wrap;gap:10px"><div style="padding:14px 20px;background:#fafafa;border:1px solid #f0f0f0;border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#dc2626">AutoCAD</div><div style="font-size:10px;color:#999;margin-top:2px">Design</div></div><div style="padding:14px 20px;background:#fafafa;border:1px solid #f0f0f0;border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#2563eb">CATIA</div><div style="font-size:10px;color:#999;margin-top:2px">3D Modeling</div></div><div style="padding:14px 20px;background:#fafafa;border:1px solid #f0f0f0;border-radius:12px;text-align:center;transition:all .3s"><div style="font-weight:800;color:#ca8a04">ANSYS</div><div style="font-size:10px;color:#999;margin-top:2px">Simulation</div></div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACADEMIC EXCELLENCE -->
+<section class="section section-gray">
+    <div class="section-inner">
+        <div class="g2" style="gap:48px;align-items:start">
+            <div class="anim-left">
+                <div class="section-tag">Quality Assurance</div>
+                <h2 class="section-title" style="text-align:left;margin-bottom:24px">Academic <span class="highlight">Excellence</span></h2>
+                <div style="display:flex;flex-direction:column;gap:14px">
+                    <div class="feature-row"><div class="feature-icon" style="background:#fef2f2;color:#dc2626"><i class="fas fa-chalkboard-teacher"></i></div><div><div class="feature-title">IFDPs & FDPs</div><div class="feature-desc">International & National Faculty Development Programs from IITs, NITs & Global Experts.</div></div></div>
+                    <div class="feature-row"><div class="feature-icon" style="background:#f0fdf4;color:#16a34a"><i class="fas fa-certificate"></i></div><div><div class="feature-title">Industry Certifications</div><div class="feature-desc">Certifications from Coursera, LinkedIn, NPTEL, MG Motors, and Volvo-Eicher.</div></div></div>
+                    <div class="feature-row"><div class="feature-icon" style="background:#fefce8;color:#ca8a04"><i class="fas fa-universal-access"></i></div><div><div class="feature-title">OBE & NEP Mapping</div><div class="feature-desc">Curriculum mapped with best National and International Universities.</div></div></div>
+                    <div class="feature-row"><div class="feature-icon" style="background:#faf5ff;color:#9333ea"><i class="fas fa-users-cog"></i></div><div><div class="feature-title">Skill Workshops</div><div class="feature-desc">In-house skill-based workshops through Academia and Industry Experts.</div></div></div>
+                </div>
+            </div>
+            <div class="anim-right">
+                <div style="background:#fff;border:2px solid #fecaca;border-radius:18px;padding:28px;margin-bottom:20px">
+                    <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px"><div style="width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#dc2626,#b91c1c);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 15px rgba(220,38,38,.3)"><i class="fas fa-user-tie" style="font-size:20px;color:#fff"></i></div><div><div style="font-size:18px;font-weight:800;color:#1a1a2e">HOD's Message</div><div style="font-size:12px;color:#999">Leading Innovation in Mobility</div></div></div>
+                    <div style="display:flex;flex-direction:column;gap:12px">
+                        <p style="font-size:14px;color:#666;line-height:1.6">"We are committed to producing engineers who are not just skilled in traditional mechanics but are also pioneers in EV, Autonomous systems, and sustainable mobility solutions."</p>
+                        <div style="margin-top:8px">
+                            <div style="font-size:15px;font-weight:700;color:#1a1a2e">Prof. (Dr.) Navdeep Sharma Dugala</div>
+                            <div style="font-size:12px;color:#dc2626;margin-top:2px">Head, Automobile Engineering</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FACULTY -->
+<section class="section" id="faculty">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Mentors & Guides</div>
+            <h2 class="section-title">Faculty <span class="highlight">Leadership</span></h2>
+            <p class="section-desc">Experienced faculty from IITs, NITs with a rich industry and research background.</p>
+        </div>
+        <div class="g3" style="margin-bottom:40px">
+            <div class="badge-box anim d1"><div class="big">10+</div><div class="small">Avg. Years Experience</div></div>
+            <div class="badge-box anim d2"><div class="big">IIT</div><div class="small">& NIT Alumni Faculty</div></div>
+            <div class="badge-box anim d3"><div class="big">40+</div><div class="small">Patents Filed</div></div>
+        </div>
+        <div class="g3" style="margin-bottom:40px">
+            <div class="card anim d1" style="text-align:center"><div class="avatar" style="background:linear-gradient(135deg,#dc2626,#b91c1c);margin:0 auto 14px">NS</div><h3 style="font-size:17px;font-weight:800;color:#1a1a2e">Prof. (Dr.) Navdeep Sharma Dugala</h3><p style="font-size:12px;color:#dc2626;font-weight:600;margin:4px 0 8px">Head of Department</p><p style="font-size:11px;color:#999;margin-bottom:12px">PhD, Automobile Engineering</p><div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#fef2f2;border-radius:8px"><i class="fas fa-award" style="color:#dc2626;font-size:12px"></i><span style="font-size:13px;font-weight:700;color:#1a1a2e">Research Leader</span></div></div>
+            <div class="card anim d2" style="text-align:center"><div class="avatar" style="background:linear-gradient(135deg,#16a34a,#15803d);margin:0 auto 14px">AS</div><h3 style="font-size:17px;font-weight:800;color:#1a1a2e">Dr. Akant Kumar Singh</h3><p style="font-size:12px;color:#16a34a;font-weight:600;margin:4px 0 8px">Academic & Research Coordinator</p><p style="font-size:11px;color:#999;margin-bottom:12px">PhD, Thermal Engineering</p><div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#f0fdf4;border-radius:8px"><i class="fas fa-book" style="color:#16a34a;font-size:12px"></i><span style="font-size:13px;font-weight:700;color:#1a1a2e">20+ Pubs</span></div></div>
+            <div class="card anim d3" style="text-align:center"><div class="avatar" style="background:linear-gradient(135deg,#ca8a04,#a16207);margin:0 auto 14px">BS</div><h3 style="font-size:17px;font-weight:800;color:#1a1a2e">Dr. Balwant Singh</h3><p style="font-size:12px;color:#ca8a04;font-weight:600;margin:4px 0 8px">Branding & Events Coordinator</p><p style="font-size:11px;color:#999;margin-bottom:12px">PhD, Design Engineering</p><div style="display:inline-flex;align-items:center;gap:8px;padding:8px 16px;background:#fefce8;border-radius:8px"><i class="fas fa-bullhorn" style="color:#ca8a04;font-size:12px"></i><span style="font-size:13px;font-weight:700;color:#1a1a2e">Industry Linkage</span></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PLACEMENTS -->
+<section class="section section-gray" id="placements">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Career Success</div>
+            <h2 class="section-title">Placement <span class="highlight">Overview</span></h2>
+            <p class="section-desc">Our alumni are placed in top automobile companies with attractive packages and designations.</p>
+        </div>
+        <div class="g4" style="margin-bottom:40px">
+            <div class="stat-card stat-card-red anim d1"><div class="sc-label" style="color:#dc2626">Highest Package</div><div class="sc-num">9.5 LPA</div><div class="sc-sub">MG Motors</div></div>
+            <div class="stat-card stat-card-yellow anim d2"><div class="sc-label" style="color:#ca8a04">Avg. Package</div><div class="sc-num">7.5 LPA</div><div class="sc-sub">M.E. Graduates</div></div>
+            <div class="stat-card stat-card-green anim d3"><div class="sc-label" style="color:#16a34a">Top Recruiters</div><div class="sc-num">15+</div><div class="sc-sub">Core Companies</div></div>
+            <div class="stat-card stat-card-blue anim d4"><div class="sc-label" style="color:#2563eb">Internships</div><div class="sc-num">100%</div><div class="sc-sub">Global Opportunities</div></div>
+        </div>
+        <div style="margin-bottom:40px" class="anim">
+            <h3 style="font-size:18px;font-weight:800;color:#1a1a2e;text-align:center;margin-bottom:20px">Top Industry Partners</h3>
+            <div class="recruiter-grid">
+                <div class="recruiter-item"><div class="name">MG Motors</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Mahindra</div><div class="type">Auto</div></div>
+                <div class="recruiter-item"><div class="name">Hero Moto Corp</div><div class="type">2-Wheelers</div></div>
+                <div class="recruiter-item"><div class="name">Honda</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Hyundai</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Volvo-Eicher</div><div class="type">Commercial</div></div>
+                <div class="recruiter-item"><div class="name">ICICI Lombard</div><div class="type">Insurance</div></div>
+                <div class="recruiter-item"><div class="name">Cost Masters</div><div class="type">Consulting</div></div>
+                <div class="recruiter-item"><div class="name">Adroitec</div><div class="type">Engineering</div></div>
+                <div class="recruiter-item"><div class="name">Tata Motors</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Maruti Suzuki</div><div class="type">Automotive</div></div>
+                <div class="recruiter-item"><div class="name">Bosch</div><div class="type">Auto Comp</div></div>
+            </div>
+        </div>
+        <div class="anim">
+            <h3 style="font-size:18px;font-weight:800;color:#1a1a2e;text-align:center;margin-bottom:20px">Star Placements</h3>
+            <div class="g4">
+                <div class="card anim d1" style="text-align:center"><div class="avatar" style="background:#fef2f2;color:#dc2626;margin:0 auto 10px">MJ</div><div style="font-size:15px;font-weight:700;color:#1a1a2e">Ms. Mehek Jan</div><div style="font-size:16px;font-weight:900;color:#dc2626;margin:4px 0">9.5 LPA</div><div style="font-size:11px;color:#999">PGET<br>MG Motors India Pvt. Ltd.</div></div>
+                <div class="card anim d2" style="text-align:center"><div class="avatar" style="background:#fefce8;color:#ca8a04;margin:0 auto 10px">SC</div><div style="font-size:15px;font-weight:700;color:#1a1a2e">Mr. Shubham Chakarbaroty</div><div style="font-size:16px;font-weight:900;color:#ca8a04;margin:4px 0">7.0 LPA</div><div style="font-size:11px;color:#999">Territory Service Head<br>Hero Moto Corp</div></div>
+                <div class="card anim d3" style="text-align:center"><div class="avatar" style="background:#f0fdf4;color:#16a34a;margin:0 auto 10px">KR</div><div style="font-size:15px;font-weight:700;color:#1a1a2e">Mr. Keshav Raj</div><div style="font-size:16px;font-weight:900;color:#16a34a;margin:4px 0">8.5 LPA</div><div style="font-size:11px;color:#999">Design Engineer<br>Cost Masters India Pvt. Ltd.</div></div>
+                <div class="card anim d4" style="text-align:center"><div class="avatar" style="background:#eff6ff;color:#2563eb;margin:0 auto 10px">CS</div><div style="font-size:15px;font-weight:700;color:#1a1a2e">Mr. Chetan Sablok</div><div style="font-size:16px;font-weight:900;color:#2563eb;margin:4px 0">9.0 LPA</div><div style="font-size:11px;color:#999">Surveyor & Loss Assessor<br>ICICI Lombard</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ALUMNI / INTERNATIONAL -->
+<section class="section">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <h2 class="section-title">Notable <span class="highlight">Alumni</span></h2>
+            <p class="section-desc">Global Ambassadors of Automobile Engineering</p>
+        </div>
+        <div class="g4">
+            <div class="card anim d1" style="text-align:center"><div class="avatar avatar-lg" style="background:linear-gradient(135deg,#dc2626,#b91c1c);margin:0 auto 14px">AS</div><h3 style="font-size:17px;font-weight:800;color:#1a1a2e">Mr. Adithyan Sasikumar</h3><p style="font-size:11px;color:#999;margin-bottom:6px">M.E. - Automobile</p><div style="font-size:14px;font-weight:700;color:#ef4444">France Exchange</div><p style="font-size:13px;color:#666;margin-top:4px;font-weight:500">École Centrale de Nantes</p></div>
+            <div class="card anim d2" style="text-align:center"><div class="avatar avatar-lg" style="background:linear-gradient(135deg,#2563eb,#60a5fa);margin:0 auto 14px">SK</div><h3 style="font-size:17px;font-weight:800;color:#1a1a2e">Mr. Srikar Sharma Kona</h3><p style="font-size:11px;color:#999;margin-bottom:6px">M.E. - Automobile</p><div style="font-size:16px;font-weight:900;color:#2563eb">8 LPA</div><p style="font-size:13px;color:#666;margin-top:4px;font-weight:500">R&D Engineer<br>Adroitec Solutions</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- RESEARCH -->
+<section class="section section-gray" id="research">
+    <div class="section-inner">
+        <div class="section-header anim">
+            <div class="section-tag">Creating Impact</div>
+            <h2 class="section-title">Research & <span class="highlight">Innovation</span></h2>
+        </div>
+        <div class="g3" style="margin-bottom:40px">
+            <div class="badge-box anim d1"><div class="big">40</div><div class="small">Patents Filed</div></div>
+            <div class="badge-box anim d2"><div class="big">200</div><div class="small">Publications</div></div>
+            <div class="badge-box anim d3"><div class="big">50</div><div class="small">M.E. Awarded</div></div>
+        </div>
+        <div class="g3" style="margin-bottom:40px">
+            <div class="img-card anim d1"><div style="height:140px;background:linear-gradient(135deg,#fef2f2,#fee2e2);display:flex;align-items:center;justify-content:center"><i class="fas fa-charging-station" style="font-size:48px;color:rgba(220,38,38,.2)"></i></div><div style="padding:20px"><span style="padding:3px 8px;background:#fef2f2;color:#dc2626;font-size:10px;font-weight:700;border-radius:4px">EV TECH</span><h4 style="font-size:14px;font-weight:700;color:#1a1a2e;margin:8px 0 4px">Electric & Hybrid Vehicles</h4><p style="font-size:11px;color:#999">Advanced battery management & hybrid systems</p></div></div>
+            <div class="img-card anim d2"><div style="height:140px;background:linear-gradient(135deg,#faf5ff,#f3e8ff);display:flex;align-items:center;justify-content:center"><i class="fas fa-leaf" style="font-size:48px;color:rgba(147,51,234,.2)"></i></div><div style="padding:20px"><span style="padding:3px 8px;background:#faf5ff;color:#9333ea;font-size:10px;font-weight:700;border-radius:4px">GREEN ENERGY</span><h4 style="font-size:14px;font-weight:700;color:#1a1a2e;margin:8px 0 4px">Alternative Fuels</h4><p style="font-size:11px;color:#999">Research on Biodiesels, Hydrogen and Renewables</p></div></div>
+            <div class="img-card anim d3"><div style="height:140px;background:linear-gradient(135deg,#f0fdf4,#dcfce7);display:flex;align-items:center;justify-content:center"><i class="fas fa-robot" style="font-size:48px;color:rgba(22,163,74,.2)"></i></div><div style="padding:20px"><span style="padding:3px 8px;background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;border-radius:4px">AUTOMATION</span><h4 style="font-size:14px;font-weight:700;color:#1a1a2e;margin:8px 0 4px">Autonomous Systems</h4><p style="font-size:11px;color:#999">Intelligent systems and connected vehicle tech</p></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="section cta-section" id="contact">
+    <div class="section-inner" style="text-align:center;position:relative;z-index:2">
+        <div class="anim">
+            <div class="hero-badge" style="margin-bottom:20px;background:rgba(255,255,255,.08);border-color:rgba(220,38,38,.3)"><div class="hero-badge-dot"></div><span>Admissions Open 2026</span></div>
+            <h2 class="section-title" style="color:#fff;margin-bottom:12px">Drive the Future of <span class="highlight">Mobility</span></h2>
+            <p style="font-size:17px;color:rgba(255,255,255,.6);max-width:600px;margin:0 auto 36px;line-height:1.7">Join the Department of Automobile Engineering and get ready to design the vehicles of tomorrow with industry giants like MG Motors and Mahindra.</p>
+            <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:48px">
+                <a href="https://www.cuchd.in" target="_blank" class="btn-primary">Apply Now <i class="fas fa-external-link-alt"></i></a>
+                <a href="https://www.cuchd.in" target="_blank" style="padding:15px 36px;background:transparent;color:#fff;border:2px solid rgba(255,255,255,.2);border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .3s;text-decoration:none;font-family:'Poppins',sans-serif">Visit www.cuchd.in</a>
+            </div>
+            <div class="g3" style="max-width:700px;margin:0 auto">
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;text-align:center"><i class="fas fa-map-marker-alt" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i><h4 style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">Campus Location</h4><p style="font-size:11px;color:rgba(255,255,255,.5)">Gharuan, Mohali, Punjab</p></div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;text-align:center"><i class="fas fa-globe" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i><h4 style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">Website</h4><p style="font-size:11px;color:rgba(255,255,255,.5)">www.cuchd.in</p></div>
+                <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px;text-align:center"><i class="fas fa-phone" style="color:#dc2626;font-size:20px;margin-bottom:10px;display:block"></i><h4 style="font-size:13px;font-weight:700;color:#fff;margin-bottom:4px">Helpline</h4><p style="font-size:11px;color:rgba(255,255,255,.5)">Visit Official Website</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-inner">
+        <div class="footer-left">
+            <div style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#dc2626,#b91c1c);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:#fff">CU</div>
+            <span class="footer-text">Department of Automobile Engineering, Chandigarh University</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+function animateCounters(){document.querySelectorAll('.counter').forEach(function(e){if(e.dataset.done)return;var r=e.getBoundingClientRect();if(r.top<window.innerHeight*.9&&r.bottom>0){e.dataset.done='1';var t=parseInt(e.dataset.target),d=2000,s=performance.now();function u(n){var p=Math.min((n-s)/d,1),v=1-Math.pow(1-p,3);e.textContent=Math.floor(t*v);p<1?requestAnimationFrame(u):e.textContent=t}requestAnimationFrame(u)}})}
+function animateBars(){document.querySelectorAll('.progress-bar').forEach(function(b){if(b.dataset.done)return;var r=b.getBoundingClientRect();if(r.top<window.innerHeight*.9){b.dataset.done='1';b.style.width=b.dataset.width}})}
+function handleReveal(){document.querySelectorAll('.anim,.anim-left,.anim-right').forEach(function(e){if(e.classList.contains('visible'))return;var r=e.getBoundingClientRect();if(r.top<window.innerHeight*.88)e.classList.add('visible')})}
+function handleNav(){var n=document.getElementById('navbar');n.classList.toggle('scrolled',window.scrollY>60)}
+var hBtn=document.getElementById('hamburgerBtn'),ov=document.getElementById('mobileOverlay'),dr=document.getElementById('mobileDrawer'),cBtn=document.getElementById('mobileCloseBtn');
+function openM(){ov.classList.add('open');dr.classList.add('open')}
+function closeM(){ov.classList.remove('open');dr.classList.remove('open')}
+hBtn.addEventListener('click',openM);cBtn.addEventListener('click',closeM);ov.addEventListener('click',closeM);
+document.querySelectorAll('.mob-link').forEach(function(a){a.addEventListener('click',closeM)});
+document.querySelectorAll('.tab-btn').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.tab-btn').forEach(function(x){x.classList.remove('active')});b.classList.add('active');document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});var p=document.getElementById('panel-'+b.dataset.tab);if(p)p.classList.add('active')})});
+document.querySelectorAll('a[href^="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();var t=document.querySelector(this.getAttribute('href'));if(t){var y=t.getBoundingClientRect().top+window.scrollY-72;window.scrollTo({top:y,behavior:'smooth'})}})});
+window.addEventListener('scroll',function(){handleReveal();animateCounters();animateBars();handleNav()},{passive:true});
+handleReveal();animateCounters();animateBars();
+</script>
+
+</body>
+</html>
